@@ -42,29 +42,39 @@ class Credentials(models.Model):
     Credentials for a user 
     """
 
-    
-
-
-    owner=models.ForeignKey(User)
 
     
 
 
-    content=models.Charfield(_('Credentials'), max_length=255)
+    user=models.ForeignKey(User)
+
+    
+
 
     
 
     
 
+    
+
+
+    content=models.CharField(_('Credentials'), max_length=255)
+    
+    
+    def __unicode__(self):
+        return self.content
+    
+>>>>>>> 472ee31ef4248b4b0bda2d88b9cdd8b29f90a698
 class References(models.Model):
     """
     References for a user 
     """
+<<<<<<< HEAD
 
-    content=models.Charfield(max_length=25)
+    
 
 
-    owner=models.ForeignKey(User)
+    user=models.ForeignKey(User)
 
 
     content=models.Charfield(_('References'), max_length=255)
@@ -75,17 +85,34 @@ class References(models.Model):
     
 
 class Choice(models.Model):
+
+    content=models.CharField(_('References'), max_length=255)
+    user=models.ForeignKey(User)
+    
+    def __unicode__(self):
+        return self.content
+    
+class Choice(models.Model): #modifications required
+
     """   
-    Each user has three choices. A choice corresponds to a user-event pair
+    Each user has three choices.
     """
-    choice_event=models.ForeignKey(Event)
 
+    
 
-    choice_user=models.ForeignKey(User)
 
     
 
     
+
+    
+
+
+    choice1=choice2=choice3=models.ForeignKey(Event)
+    user=models.ForeignKey(User)
+    
+    def __unicode__(self):
+        return self.update_text
 
     
 
@@ -96,6 +123,9 @@ class Answers(models.Model):
     user=models.ForeignKey(User)
     question=models.ForeignKey(Question)
     answer=models.CharField(max_length=255)
+    
+    def __unicode__(self):
+        return self.answer
     
 class UserProfile(User, models.Model):
     """
