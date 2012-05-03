@@ -1,0 +1,162 @@
+Comments:
+Must be complete sentences. 
+NEVER alter the case of identifiers!
+use two spaces after a sentence-ending period.
+Strunk and White apply when writing in english.
+
+Types of comments:
+	Block comments:
+		starts with a ‘#’ followed by a single space
+		paragraphs are separated by blank line
+	Inline comments:
+		avoid using this kind
+		at least two spaces from end of statement		
+	Documentation Strings:
+		refer PEP 257 for complete details.
+for all public modules, functions, classes, and methods.
+for non-public methods, have a comment that describes what the method does. This comment should appear after the def  line.
+the “”” that ends a multiline docstring should be on a separate line preferably preceded by a blank line.
+
+Programming Recommendations:
+	code should be equally efficient in ALL implementations of Python.
+comparisons to singletons like None should always be done with is or is not and NOT equality operators
+reflexivity rules are assumed by Python. i.e x<y and y>x are equivalent
+When raising an exception, use raiseValueError('message') instead of the older form raise ValueError, 'message'.
+
+When catching exceptions, mention specific exceptions whenever possible instead of using a bare except: clause.
+
+A good rule of thumb is to limit use of bare 'except' clauses to two cases:
+1. If the exception handler will be printing out or logging the traceback; at least the user will be aware that an error has occurred.
+2. If the code needs to do some cleanup work, but then lets the exception propagate upwards withraise. try...finally can be a better way to handle this case.
+
+	limit the try clause to the absolute minimum amount of code necessary
+Use string methods instead of the string module.
+Use ''.startswith() and ''.endswith() instead of string slicing to check for prefixes or suffixes.
+Object type comparisons should always use isinstance() instead of comparing types directly.
+Yes: if isinstance(obj, int):
+
+No:  if type(obj) is type(1):
+
+For sequences, (strings, lists, tuples), use the fact that empty sequences are false.
+Don't write string literals that rely on significant trailing whitespace. Such trailing whitespace is visually indistinguishable and some editors (or more recently, reindent.py) will trim them.
+Don't compare boolean values to True or False using ==.
+Yes:   if greeting:
+No:    if greeting == True:
+Worse: if greeting is True:
+
+The Python standard library will not use function annotations as that would result in a premature commitment to a particular annotation style
+
+Code Layout
+Use 4 spaces per indentation level.
+
+Implicit line joining
+
+# Aligned with opening delimiter
+gen = trying_to_show_indentation(ex_one, ex_two,
+                         	                    ex_three, ex_four)
+
+#Not this
+gen = trying_to_show_indentation(ex_one, ex_two,
+        ex_three, ex_four)
+
+#A hanging indent, indents the rest of the text while leaving the first line in place used to show continuation lines.
+
+# More indentation included to distinguish this from the rest.
+def trying_to_show_indentation(
+        ex_one, ex_two, ex_three,
+        ex_four):
+    print done
+
+#Not like this
+def trying_to_show_indentation(
+    ex_one, ex_two, ex_three,
+    ex_four):
+    print done
+
+#Do this
+Tabs: Use the Tab width spin box to specify the width of the space that gedit inserts when you press the Tab key.
+Select the Insert spaces instead of tabs option to specify that gedit inserts spaces instead of a tab character when you press the Tab key.
+Auto Indentation :Select the Enable auto indentation option to specify that the next line starts at the indentation level of the current line.
+
+
+Spaces are more popular than tabs. if a mixture is used, convert to spaces exclusively 
+maximum line length - 79 characters
+break after binary operator
+            blah blah ("I am trying to say%s, %s" %
+                             (width, height))
+spacing --- two lines b/w top functions and classes
+inside class separate method defs by single line
+in functions, preferably don’t use blank line -- if at all for indicating end of logical section
+
+IMPORTS
+Imports should usually be on separate lines and at the top of the file.
+ORDER
+1. standard library imports
+2. related third party imports
+3. local application/library specific imports
+blank line b/w each group of imports        
+
+
+Whitespaces in expressions and statements -
+- avoid space immediately inside a bracket
+Yes: spam(ham[1], {eggs: 2})
+No:  spam( ham[ 1 ], { eggs: 2 } )
+
+- no space before a comma, (only after it!)
+Yes: if x == 4: print x, y; x, y = y, x
+No:  if x == 4 : print x , y ; x , y = y , x
+
+- no space before opening parenthesis
+
+- 1 space each on both sides of ==, <, >, !=, <>, <=, >=, in, not in, is, is not operators
+Yes: x = x * 2 - 1
+No: x=x*2-1
+
+- Dont put MULTIPLE statements in one line. Compound Statements discouraged!
+
+
+Version Bookkeeping
+
+If you have to have Subversion, CVS, or RCS crud in your source file, do it as follows.
+
+__version__ = "$Revision: 24d02504e664 $"
+# $Source$
+
+These lines should be included after the module's docstring, before any other code, separated by a blank line above and below.
+
+Naming Conventions:
+
+Never use the characters 'l' (lowercase letter el), 'O' (uppercase letter oh), or 'I' (uppercase letter eye) as single character variable names.
+
+package and module names - lowercasewithnounderscores
+
+class names - CapsWordConvention
+
+function names - lower_case_with_underscores
+
+exception names - Since this is a class, use CapsWord. But suffix it with Error, eg. RandomError
+
+global variables - same_as_funtion_names
+
+function and method arguments -
+Always use self for the first argument to instance methods.
+Always use cls for the first argument to class methods.
+
+
+method names and instance variables - same_as_function_names
+avoid name clashes with subclasses!
+
+constants - CAPITALS
+ 
+
+
+
+
+
+
+
+
+
+
+
+
