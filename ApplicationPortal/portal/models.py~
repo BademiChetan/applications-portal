@@ -8,7 +8,7 @@ class Event(models.Model):
     """
     Creates an event for a specific Type
     """
-    name=models.CharField(_('Event'), max_length=200, unique=True)
+    name=models.CharField(_('Event'), max_length=255, unique=True)
     group=models.ForeignKey(Group)
     
     def __unicode__(self):
@@ -21,7 +21,7 @@ class Question(models.Model):
     """
     Creates a question for an event
     """
-    question=models.CharField(_('Question'), max_length=200)
+    question=models.CharField(_('Question'), max_length=255)
     event=models.ManyToManyField(Event)
     
     def __unicode__(self):
@@ -31,7 +31,7 @@ class Update(models.Model):
     """
     Creates an object to post an update
     """
-    update_text=models.CharField(_('Update'), max_length=200)
+    update_text=models.CharField(_('Update'), max_length=255)
     timestamp=models.DateTimeField(default=datetime.datetime.now)
     
     def __unicode__(self):
@@ -41,14 +41,18 @@ class Credentials(models.Model):
     """
     Credentials for a user 
     """
-    content=models.Charfield(max_length=25)
+
+    
 
 
     owner=models.ForeignKey(User)
 
     
 
-    user=models.ForeignKey(User)
+
+    content=models.Charfield(_('Credentials'), max_length=255)
+
+    
 
     
 
@@ -56,19 +60,23 @@ class References(models.Model):
     """
     References for a user 
     """
+
     content=models.Charfield(max_length=25)
 
 
     owner=models.ForeignKey(User)
 
-    user=models.ForeignKey(User)
+
+    content=models.Charfield(_('References'), max_length=255)
+
+    
 
     
     
 
 class Choice(models.Model):
     """   
-    Each user has three choice.A choice corresponds to a user-event pair
+    Each user has three choices. A choice corresponds to a user-event pair
     """
     choice_event=models.ForeignKey(Event)
 
@@ -85,14 +93,15 @@ class Answers(models.Model):
     """
     Each answer represents a response by a user to a question
     """
-    answer_user=models.ForeignKey(User)
-    answer_question=models.ForeignKey(User)
-    answer_text=models.CharField(max_length=255)
+    user=models.ForeignKey(User)
+    question=models.ForeignKey(Question)
+    answer=models.CharField(max_length=255)
     
-class Userprofile(models.Model):
+class UserProfile(User, models.Model):
     """
     Userprofile
     """
+
 
     owner=models.ForeignKey(User)
     rollno=models.CharField(max_length=20)
@@ -100,7 +109,10 @@ class Userprofile(models.Model):
     
     
 
-    phonenumber=models.CharField(max_length=20)
+    
     roomnumber=models.CharField(max_length=20)
     department=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
+
+    ph_no=models.BigIntegerField
+
