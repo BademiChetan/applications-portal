@@ -13,7 +13,7 @@ class Coords_Only(object):
         
     def __call__(self, request, *args, **kwargs):
         if request.user.is_authenticated():
-            User=UserProfile.objects.get(UserProfile.username=str(request.user))
+            User=UserProfile.objects.get(UserProfile.user=request.user)
             if request.user.is_authenticated() and User.is_core==False:
                 self.views_func(request, *args, **kwargs)
                             
@@ -26,7 +26,7 @@ class Cores_Only(object):
         
     def __call__(self, request, *args, **kwargs):
         if request.user.is_authenticated():
-            User=UserProfile.objects.get(UserProfile.username=str(request.user))
+            User=UserProfile.objects.get(UserProfile.user=request.user)
             if request.user.is_authenticated() and User.is_core==True:
                 self.views_func(request, *args, **kwargs)
                             
