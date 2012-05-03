@@ -25,7 +25,7 @@ class Question(models.Model):
     event=models.ManyToManyField(Event)
     
     def __unicode__(self):
-        return self.name
+        return self.question
 
 class Update(models.Model):
     """
@@ -35,5 +35,5 @@ class Update(models.Model):
     timestamp=models.DateTimeField(default=datetime.datetime.now)
     
     def __unicode__(self):
-        return self.update
+        return self.update_text
 

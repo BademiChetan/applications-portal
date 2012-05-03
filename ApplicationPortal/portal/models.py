@@ -35,5 +35,5 @@ class Update(models.Model):
     timestamp=models.DateTimeField(default=datetime.datetime.now)
     
     def __unicode__(self):
-        return self.update
+        return self.update_text
 
