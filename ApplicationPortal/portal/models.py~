@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import *
 import datetime
 
+>>>>>>> 207dd2ecc89cb750caeaa9e4138d50491d4c81bd
 # Create your models here.
 
 class Event(models.Model):
