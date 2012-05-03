@@ -8,25 +8,27 @@ class Event(models.Model)
     Creates an event for a specific Type
     """
     name=models.CharField
-    event_type=models.ForeignKey(Type)
-    group
+    group=models.ForeignKey(Group)
     
-   
-    
-class Type(models.Model)
-    """
-    Creates an Event Type
-    """
-    name=models.CharField
-    
+    def __unicode__(self):
+        return self.name
+                
+    class Meta:
+        ordering = ['name']
+        
 class Question(models.Model)
     """
     Creates a question for an event
     """
-    text=models.CharField
+    question=models.CharField
     event=models.ManyToManyField(Event)
+    
+    def __unicode__(self):
+        return self.name
 
 class Update(models.Model)
     """
     Creates an object to post an update
     """
+    update_text=models.CharField
+    timestamp=models.DateTimeField
