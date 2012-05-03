@@ -42,14 +42,14 @@ class Credentials(models.Model):
     Credentials for a user 
     """
     content=models.Charfield(max_length=25)
-<<<<<<< HEAD
+
 
     owner=models.ForeignKey(User)
 
     
-=======
+
     user=models.ForeignKey(User)
->>>>>>> a408ae69d6407eb113451ef8ab5531b86c39e2c7
+
     
 
 class References(models.Model):
@@ -57,13 +57,12 @@ class References(models.Model):
     References for a user 
     """
     content=models.Charfield(max_length=25)
-<<<<<<< HEAD
+
 
     owner=models.ForeignKey(User)
 
-=======
     user=models.ForeignKey(User)
->>>>>>> a408ae69d6407eb113451ef8ab5531b86c39e2c7
+
     
     
 
@@ -72,14 +71,14 @@ class Choice(models.Model):
     Each user has three choice.A choice corresponds to a user-event pair
     """
     choice_event=models.ForeignKey(Event)
-<<<<<<< HEAD
+
 
     choice_user=models.ForeignKey(User)
 
     
-=======
-    choice_event=models.ForeignKey(User)
->>>>>>> a408ae69d6407eb113451ef8ab5531b86c39e2c7
+
+    
+
     
 
 class Answers(models.Model):
@@ -94,13 +93,13 @@ class Userprofile(models.Model):
     """
     Userprofile
     """
-<<<<<<< HEAD
+
     owner=models.ForeignKey(User)
     rollno=models.CharField(max_length=20)
-=======
-    user=models.ForeignKey(User)
-    name=models.CharField(max_length=30)
->>>>>>> a408ae69d6407eb113451ef8ab5531b86c39e2c7
+
+    
+    
+
     phonenumber=models.CharField(max_length=20)
     roomnumber=models.CharField(max_length=20)
     department=models.CharField(max_length=20)
