@@ -36,4 +36,37 @@ class Update(models.Model):
     
     def __unicode__(self):
         return self.update_text
+class Credentials(models.Model):
+    """
+    Credentials for a user 
+    """
+    content=models.Charfield(max_length=25)
+    owner=models.ForeignKey(user)
+class References(models.Model):
+    """
+    References for a user 
+    """
 
+    
+    content=models.Charfield(max_length=25)
+    owner=models.ForeignKey(user)
+class Choice(models.Model):
+    """   
+    Each user has three choice.A choice corresponds to a user-event pair
+    """
+    choice_event=models.ForeignKey(Event)
+    choice_event=models.ForeignKey(user)
+class Answers(models.Model):
+    """
+    Each answer represents a response by a user to a question
+    """
+    answer_user=models.ForeignKey(user)
+    answer_question=models.ForeignKey(user)
+    answer_text=models.CharField(max_length=255)
+class Userprofile(models.Model):
+    """
+    Userprofile
+    """
+    owner=models.ForeignKey(user)
+    name=models.CharField(max_length=30)
+    phonenumber=models.CharField(max_length=20)
