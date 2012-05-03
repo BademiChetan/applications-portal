@@ -1,0 +1,10 @@
+<html>
+    <center><b>Create A User : </center></b><br/>      
+    <form action="" method='POST'>
+	<table>
+        {% csrf_token %}
+        {{Registrationform.as_table}}         
+        </table>
+        <input type ='submit' value='Register'/>
+    </form>   
+</html>
