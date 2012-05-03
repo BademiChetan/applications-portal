@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import Group
 from django.forms.widgets import CheckboxSelectMultiple()
 from applications-portal.ApplicationPortal.portal.models import Events
 from portal.models import *
@@ -8,22 +9,12 @@ class Loginform(forms.Form):
     password=forms.CharField(widget=forms.PasswordInput)
 
 class Preferenceform(forms.Form):
-
-class LoginForm(forms.Forms):
-    username=forms.CharField()
-    password=forms.CharField(widget=forms.PasswordInput)
-
-class PreferenceForm(forms.Forms):
-
     preference1=forms.ModelChoiceField(queryset=Events.objects.all()) #from models they shd send the name of the event alone
     preference2=forms.ModelChoiceField(queryset=Events.objects.all()) 
     preference3=forms.ModelChoiceField(queryset=Events.objects.all()) 
 
 
 class Registrationform(forms.Form):
-
-class RegistrationForm(froms.Forms):
-
     name=forms.CharField()
     rollnumber=forms.CharField()
     username=forms.CharField()
@@ -35,12 +26,11 @@ class RegistrationForm(froms.Forms):
     hostel=forms.Charfield()
 
 
-class Addgroup(form.Form):
-    name=forms.CharField()
-    permissions=forms.MultipleChoiceField(widget=CheckboxSelectMultiple())
-    
+class AddGroup(form.ModelForm):
+    class Meta:
+        model = Group
+   	widgets={'permissions':forms.MultipleChoiceField(widget=CheckboxSelectMultiple())}
 
-    
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event

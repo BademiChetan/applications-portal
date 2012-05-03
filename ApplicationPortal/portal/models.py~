@@ -77,10 +77,11 @@ class Answer(models.Model):
     def __unicode__(self):
         return self.answer
     
-class UserProfile(User, models.Model):
+class UserProfile(models.Model):
     """
     Userprofile
     """    
+    user=models.ForeignKey(User)
     rollno=models.CharField(max_length=20)   
     roomnumber=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
