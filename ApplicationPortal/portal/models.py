@@ -64,12 +64,11 @@ class Credentials(models.Model):
     def __unicode__(self):
         return self.content
     
->>>>>>> 472ee31ef4248b4b0bda2d88b9cdd8b29f90a698
+
 class References(models.Model):
     """
     References for a user 
     """
-<<<<<<< HEAD
 
     
 
@@ -144,5 +143,5 @@ class UserProfile(User, models.Model):
     department=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
 
-    ph_no=models.BigIntegerField
+    ph_no=models.BigIntegerField(max_length=23)
 
