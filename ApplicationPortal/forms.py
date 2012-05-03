@@ -1,5 +1,5 @@
 from django import forms
-from applications-portal.ApplicationPortal.models import Events
+from applications-portal.ApplicationPortal.portal.models import Events
 
 class Loginform(forms.Forms)
     username=forms.CharField()
@@ -15,7 +15,8 @@ class Registrationform(froms.Forms)
     rollnumber=forms.CharField()
     username=forms.CharField()
     Password=forms.CharField(widget=forms.PasswordInput)
-    confirm password=forms.CharField(widget=forms.PasswordInput)
+    confirm_password=forms.CharField(widget=forms.PasswordInput)
     cgpa=forms.IntegerField()
-    room number=forms.IntergerField()
-    email=EmailField()
+    room_number=forms.IntergerField()
+    email=forms.EmailField()
+    hostel=forms.Charfield()
