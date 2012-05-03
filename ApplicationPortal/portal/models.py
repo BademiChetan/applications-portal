@@ -40,85 +40,33 @@ class Credentials(models.Model):
     """
     Credentials for a user 
     """
-
-
-    
-
-
     user=models.ForeignKey(User)
-
-    
-
-
-    
-
-    
-
-    
-
-
     content=models.CharField(_('Credentials'), max_length=255)
-    
     
     def __unicode__(self):
         return self.content
-    
 
 class References(models.Model):
     """
     References for a user 
     """
-
-    
-
-
     user=models.ForeignKey(User)
-
-
     content=models.Charfield(_('References'), max_length=255)
-
-    
-
-    
-    
-
-class Choice(models.Model):
-
-    content=models.CharField(_('References'), max_length=255)
-    user=models.ForeignKey(User)
     
     def __unicode__(self):
         return self.content
     
 class Choice(models.Model): #modifications required
-
     """   
     Each user has three choices.
     """
-
-    
-
-
-    
-
-    
-
-    
-
-
     choice1=choice2=choice3=models.ForeignKey(Event)
     user=models.ForeignKey(User)
     
     def __unicode__(self):
-
-        
-
-
         return self.user
 
-    
-
-class Answers(models.Model):
+class Answer(models.Model):
     """
     Each answer represents a response by a user to a question
     """
@@ -129,15 +77,17 @@ class Answers(models.Model):
     def __unicode__(self):
         return self.answer
     
-class UserProfile(User, models.Model):
+class UserProfile(models.Model):
     """
     Userprofile
     """    
+    user=models.ForeignKey(User)
     rollno=models.CharField(max_length=20)   
     roomnumber=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
     ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
+    group=models.ForeignKey(Group)
     
     def __unicode__(self):
         return self.username
