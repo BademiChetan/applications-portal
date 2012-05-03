@@ -31,15 +31,15 @@ def home(request):
         user = authenticate(username=request.POST['username'],password=request.POST['password'])
         if user is not None:
             login(request, user)
-            temp = UserProfile.objects.get(user=request.user)
+            temp = UserProfile.objects.get(UserProfile.user=request.user)
             if temp.is_core==False:
                 return render_to_response("coord_home.html",locals(),context_instance=RequestContext(request))
-            else
+            else:
                 return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
     	else:
     	#Must create Invalid message display
 		return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
-    return render_to_response("Home.html",locals(),context_instance=RequestContext(request))	
+    return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
 
 def super_home(request):
     """
