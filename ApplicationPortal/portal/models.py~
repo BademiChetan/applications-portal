@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import Group
 
 # Create your models here.
 
@@ -9,7 +8,6 @@ class Event(models.Model)
     """
     name=models.CharField
     event_type=models.ForeignKey(Type)
-    group
     
    
     
