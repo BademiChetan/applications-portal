@@ -16,11 +16,9 @@ class Coords_Only(object):
             User=UserProfile.objects.get(UserProfile.username=str(request.user))
             if request.user.is_authenticated() and User.is_core==False:
                 self.views_func(request, *args, **kwargs)
-            else:
-                HttpResponseRedirect(#No permission) 
-                
+                            
         else:
-            HttpResponseRedirect(#notloggedin) 
+            HttpResponseRedirect('/') 
 
 class Cores_Only(object):
     def __init__(self,views_func):
@@ -31,10 +29,8 @@ class Cores_Only(object):
             User=UserProfile.objects.get(UserProfile.username=str(request.user))
             if request.user.is_authenticated() and User.is_core==True:
                 self.views_func(request, *args, **kwargs)
-            else:
-                HttpResponseRedirect(#No permission) 
-                
+                            
         else:
-            HttpResponseRedirect(#notloggedin) 
+            HttpResponseRedirect('/') 
 
 
