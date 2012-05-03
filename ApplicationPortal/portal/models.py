@@ -65,7 +65,7 @@ class Choice(models.Model): #modifications required
     user=models.ForeignKey(User)
     
     def __unicode__(self):
-        return self.update_text
+        return self.user
     
 class Answers(models.Model):
     """
@@ -82,4 +82,9 @@ class UserProfile(User, models.Model):
     """
     Userprofile
     """
-    ph_no=models.BigIntegerField
+    ph_no=models.BigIntegerField()
+    is_core=models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return self.username
+    
