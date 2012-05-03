@@ -17,5 +17,5 @@ class Registrationform(froms.Forms)
     Password=forms.CharField(widget=forms.PasswordInput)
     confirm password=forms.CharField(widget=forms.PasswordInput)
     cgpa=forms.IntegerField()
-    room number=forms.I
+    room number=forms.IntergerField()
     email=EmailField()
