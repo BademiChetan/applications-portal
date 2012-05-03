@@ -41,22 +41,31 @@ class Credentials(models.Model):
     """
     Credentials for a user 
     """
-    content=models.Charfield(_('Credentials'), max_length=255)
+    content=models.CharField(_('Credentials'), max_length=255)
     user=models.ForeignKey(User)
+    
+    def __unicode__(self):
+        return self.content
     
 class References(models.Model):
     """
     References for a user 
     """
-    content=models.Charfield(_('References'), max_length=255)
+    content=models.CharField(_('References'), max_length=255)
     user=models.ForeignKey(User)
     
-class Choice(models.Model):
+    def __unicode__(self):
+        return self.content
+    
+class Choice(models.Model): #modifications required
     """   
-    Each user has three choices. A choice corresponds to a user-event pair
+    Each user has three choices.
     """
-    choice_event=models.ForeignKey(Event)
-    choice_event=models.ForeignKey(User)
+    choice1=choice2=choice3=models.ForeignKey(Event)
+    user=models.ForeignKey(User)
+    
+    def __unicode__(self):
+        return self.update_text
     
 class Answers(models.Model):
     """
@@ -65,6 +74,9 @@ class Answers(models.Model):
     user=models.ForeignKey(User)
     question=models.ForeignKey(Question)
     answer=models.CharField(max_length=255)
+    
+    def __unicode__(self):
+        return self.answer
     
 class UserProfile(User, models.Model):
     """

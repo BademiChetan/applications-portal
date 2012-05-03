@@ -8,7 +8,7 @@ class Event(models.Model):
     """
     Creates an event for a specific Type
     """
-    name=models.CharField(_('Event'), max_length=200, unique=True)
+    name=models.CharField(_('Event'), max_length=255, unique=True)
     group=models.ForeignKey(Group)
     
     def __unicode__(self):
@@ -21,7 +21,7 @@ class Question(models.Model):
     """
     Creates a question for an event
     """
-    question=models.CharField(_('Question'), max_length=200)
+    question=models.CharField(_('Question'), max_length=255)
     event=models.ManyToManyField(Event)
     
     def __unicode__(self):
@@ -41,22 +41,31 @@ class Credentials(models.Model):
     """
     Credentials for a user 
     """
-    content=models.Charfield(_('Credentials'), max_length=255)
+    content=models.CharField(_('Credentials'), max_length=255)
     user=models.ForeignKey(User)
+    
+    def __unicode__(self):
+        return self.content
     
 class References(models.Model):
     """
     References for a user 
     """
-    content=models.Charfield(_('References'), max_length=255)
+    content=models.CharField(_('References'), max_length=255)
     user=models.ForeignKey(User)
     
-class Choice(models.Model):
+    def __unicode__(self):
+        return self.content
+    
+class Choice(models.Model): #modifications required
     """   
     Each user has three choices. A choice corresponds to a user-event pair
     """
-    choice_event=models.ForeignKey(Event)
-    choice_event=models.ForeignKey(User)
+    choice1=choice2=choice3=models.ForeignKey(Event)
+    user=models.ForeignKey(User)
+    
+    def __unicode__(self):
+        return self.update_text
     
 class Answers(models.Model):
     """
@@ -65,6 +74,9 @@ class Answers(models.Model):
     user=models.ForeignKey(User)
     question=models.ForeignKey(Question)
     answer=models.CharField(max_length=255)
+    
+    def __unicode__(self):
+        return self.answer
     
 class UserProfile(User, models.Model):
     """
