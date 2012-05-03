@@ -1,13 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import *
+import datetime
 
 # Create your models here.
 
-class Event(models.Model)
+class Event(models.Model):
     """
     Creates an event for a specific Type
     """
-    name=models.CharField
+    name=models.CharField(_('Event'), max_length=200, unique=True)
     group=models.ForeignKey(Group)
     
     def __unicode__(self):
@@ -16,19 +17,23 @@ class Event(models.Model)
     class Meta:
         ordering = ['name']
         
-class Question(models.Model)
+class Question(models.Model):
     """
     Creates a question for an event
     """
-    question=models.CharField
+    question=models.CharField(_('Question'), max_length=200)
     event=models.ManyToManyField(Event)
     
     def __unicode__(self):
-        return self.name
+        return self.question
 
-class Update(models.Model)
+class Update(models.Model):
     """
     Creates an object to post an update
     """
-    update_text=models.CharField
-    timestamp=models.DateTimeField
+    update_text=models.CharField(_('Update'), max_length=200)
+    timestamp=models.DateTimeField(default=datetime.datetime.now)
+    
+    def __unicode__(self):
+        return self.update
+
