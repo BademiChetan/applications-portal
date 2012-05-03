@@ -1,6 +1,24 @@
 from django.contrib.auth.models import Group
 
 # Create your views here.
+from django.core.context_processors import csrf
+from portal.models import *
+from django.shortcuts import *
+from django import forms
+from forms import*
+
+    		
+def register():
+	def register(request):
+	if request.method == 'POST':
+		form = RegistrationForm(request.POST)
+		if form.is_valid():
+			new_user = form.save()
+			return HttpResponseRedirect('/home/')
+			
+	else:
+		form = RegistrationForm()
+	return render_to_response('template/registration.html',{'form':form,},context_instance=RequestContext(request))
 
 def super_home(request):
     """
