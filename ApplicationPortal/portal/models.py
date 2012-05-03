@@ -43,9 +43,13 @@ class Credentials(models.Model):
     """
     content=models.Charfield(max_length=25)
 
+
     owner=models.ForeignKey(User)
 
     
+
+    user=models.ForeignKey(User)
+
     
 
 class References(models.Model):
@@ -54,7 +58,10 @@ class References(models.Model):
     """
     content=models.Charfield(max_length=25)
 
+
     owner=models.ForeignKey(User)
+
+    user=models.ForeignKey(User)
 
     
     
@@ -65,9 +72,13 @@ class Choice(models.Model):
     """
     choice_event=models.ForeignKey(Event)
 
+
     choice_user=models.ForeignKey(User)
 
     
+
+    
+
     
 
 class Answers(models.Model):
@@ -82,8 +93,13 @@ class Userprofile(models.Model):
     """
     Userprofile
     """
+
     owner=models.ForeignKey(User)
     rollno=models.CharField(max_length=20)
+
+    
+    
+
     phonenumber=models.CharField(max_length=20)
     roomnumber=models.CharField(max_length=20)
     department=models.CharField(max_length=20)
