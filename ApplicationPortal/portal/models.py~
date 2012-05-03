@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import *
 import datetime
-
->>>>>>> 207dd2ecc89cb750caeaa9e4138d50491d4c81bd
 # Create your models here.
 
 class Event(models.Model):
@@ -42,85 +40,33 @@ class Credentials(models.Model):
     """
     Credentials for a user 
     """
-
-
-    
-
-
     user=models.ForeignKey(User)
-
-    
-
-
-    
-
-    
-
-    
-
-
     content=models.CharField(_('Credentials'), max_length=255)
-    
     
     def __unicode__(self):
         return self.content
-    
 
 class References(models.Model):
     """
     References for a user 
     """
-
-    
-
-
     user=models.ForeignKey(User)
-
-
     content=models.Charfield(_('References'), max_length=255)
-
-    
-
-    
-    
-
-class Choice(models.Model):
-
-    content=models.CharField(_('References'), max_length=255)
-    user=models.ForeignKey(User)
     
     def __unicode__(self):
         return self.content
     
 class Choice(models.Model): #modifications required
-
     """   
     Each user has three choices.
     """
-
-    
-
-
-    
-
-    
-
-    
-
-
     choice1=choice2=choice3=models.ForeignKey(Event)
     user=models.ForeignKey(User)
     
     def __unicode__(self):
-
-        
-
-
         return self.user
 
-    
-
-class Answers(models.Model):
+class Answer(models.Model):
     """
     Each answer represents a response by a user to a question
     """
@@ -137,10 +83,10 @@ class UserProfile(User, models.Model):
     """    
     rollno=models.CharField(max_length=20)   
     roomnumber=models.CharField(max_length=20)
-    department=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
     ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
+    group=models.ForeignKey(Group)
     
     def __unicode__(self):
         return self.username

@@ -32,5 +32,15 @@ def super_home(request):
     group=Group.objects.all()
     #Add core object here
     return render_to_response('super_home.html',locals(),context_instance= RequestContext(request))
+
+@Coords_Only    
+def coord_home(request):
+    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    return render_to_response("home.html",{'user':user})
+    
+@Cores_Only
+def core_home(request):
+    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    return render_to_response("home.html",{'user':user})    
     
     	
