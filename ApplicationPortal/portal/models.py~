@@ -134,25 +134,12 @@ class Answers(models.Model):
 class UserProfile(User, models.Model):
     """
     Userprofile
-    """
-
-
-
-    
-    rollno=models.CharField(max_length=20)
-
-    
-    
-
-    
+    """    
+    rollno=models.CharField(max_length=20)   
     roomnumber=models.CharField(max_length=20)
     department=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
-
-    ph_no=models.BigIntegerField(max_length=23)
-
-
-    
+    ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
     
     def __unicode__(self):
