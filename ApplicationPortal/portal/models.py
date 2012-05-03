@@ -111,7 +111,11 @@ class Choice(models.Model): #modifications required
     user=models.ForeignKey(User)
     
     def __unicode__(self):
-        return self.update_text
+
+        
+
+
+        return self.user
 
     
 
@@ -132,7 +136,8 @@ class UserProfile(User, models.Model):
     """
 
 
-    owner=models.ForeignKey(User)
+
+    
     rollno=models.CharField(max_length=20)
 
     
@@ -145,3 +150,10 @@ class UserProfile(User, models.Model):
 
     ph_no=models.BigIntegerField(max_length=23)
 
+
+    
+    is_core=models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return self.username
+    
