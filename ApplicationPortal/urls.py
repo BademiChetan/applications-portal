@@ -6,7 +6,9 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'ApplicationPortal.views.home', name='home'),
+    url(r'^$', 'ApplicationPortal.views.home', name='home'),
+    url(r'^login$', 'ApplicationPortal.views.login', name='login'),
+    url(r'^register$', 'ApplicationPortal.views.register', name='register'),
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
