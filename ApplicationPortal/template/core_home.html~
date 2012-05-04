@@ -1,4 +1,6 @@
 <html>
+
+
 <body>
 Welcome {{user}}!
 <br/>
@@ -6,10 +8,16 @@ Welcome {{user}}!
 <tr>
 {% for e in event %}
 <td>
-<a href="/{{ e.name }}/">{{ e.name }}</a>
+<a href="/{{ e.id }}/">{{ e.name }}</a>
 </td>
+<td>
+<a href="/editeventname/{{e.id}}/">Edit Event</a>
+</td>
+
 {% endfor %}
 </tr>
 </table>
+<a href="/addevent">Add Event</a>
 </body>
+
 </html>
