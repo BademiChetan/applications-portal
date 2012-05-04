@@ -1,0 +1,14 @@
+<html>
+<body>
+Welcome,{{core.username}}
+
+the application of {{temp.username}} is as follows:
+
+{% for i in questions %}
+    {% for j in answers %}
+	{{questions.question}}
+	{{answers.answer}}
+    {% endfor %}
+{% endfor %}
+</body>
+</html>
