@@ -1,8 +1,6 @@
 <html>
 {% if invalid_login %}
-<font clor="red">
 Invalid Login!
-</font>
 {% endif %}
 <br/>
 <h3>Login</h3>

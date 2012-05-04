@@ -1,0 +1,15 @@
+<html>
+<body>
+Welcome {{user}}!
+</br>
+<table>
+<tr>
+{% for e in event %}
+<td>
+<a href="/{{ e.name }}/">{{ e.name }}</a>
+</td>
+{% endfor %}
+</tr>
+</table>
+</body>
+</html>

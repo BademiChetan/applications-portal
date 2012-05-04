@@ -1,0 +1,8 @@
+<html>
+<form action="" method="post">
+<input type="radio" name="preferences" value="preference1" />Preference 1<br/>
+<input type="radio" name="preferences" value="preference2" />Preference 2<br/>
+<input type="radio" name="preferences" value="preference3" />Preference 3<br/>
+<input type="submit" value="Submit"/>
+</form>
+</html>
