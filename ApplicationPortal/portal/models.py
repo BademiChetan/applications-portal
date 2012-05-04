@@ -81,7 +81,8 @@ class Choice(models.Model): #modifications required
     event=models.ForeignKey(Event)
     pref_no=models.IntegerField()
     user=models.ForeignKey(UserProfile)
-    is_accepted=models.BooleanField(default=False)
+    is_accepted=models.IntegerField(default=0) #0-unevaluated,1-accepted,-1-rejected
+
     
     def __unicode__(self):
         return self.user
