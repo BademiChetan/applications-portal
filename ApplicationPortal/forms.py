@@ -42,16 +42,17 @@ class Preferenceform(forms.Form):
 
 
 
-class Registrationform(forms.Form):
+class RegistrationForm(forms.Form):
     name=forms.CharField()
     rollnumber=forms.CharField()
     username=forms.CharField()
-    Password=forms.CharField(widget=forms.PasswordInput)
+    password=forms.CharField(widget=forms.PasswordInput)
     confirm_password=forms.CharField(widget=forms.PasswordInput)
-    cgpa=forms.IntegerField()
-    room_number=forms.IntergerField()
+    cgpa=forms.DecimalField(max_digits=4,decimal_places=2)
+    room_number=forms.IntegerField()
     email=forms.EmailField()
-    hostel=forms.Charfield()
+    hostel=forms.CharField()
+    phoneno=forms.IntegerField()
 
 
 class AddGroup(form.ModelForm):
