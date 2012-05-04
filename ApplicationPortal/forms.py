@@ -6,7 +6,7 @@ class Loginform(forms.Forms)
     password=forms.CharField(widget=forms.PasswordInput)
 
 class Preferenceform(forms.Forms)
-    preference1=forms.ModelChoiceField(queryset=Events.objects.all()) #from models they shd send the name of the event alone
+    preference1=forms.ModelChoiceField(queryset=Events.objects.all()) 
     preference2=forms.ModelChoiceField(queryset=Events.objects.all()) 
     preference3=forms.ModelChoiceField(queryset=Events.objects.all()) 
 
@@ -19,3 +19,5 @@ class Registrationform(froms.Forms)
     cgpa=forms.IntegerField()
     room number=forms.IntergerField()
     email=EmailField()
+
+class 
