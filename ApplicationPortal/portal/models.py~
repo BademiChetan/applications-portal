@@ -62,7 +62,7 @@ class Choice(models.Model): #modifications required
     """   
     Each user has three choices.
     """
-    choice=models.ForeignKey(Event)
+    event=models.ForeignKey(Event)
     pref_no=models.IntegerField()
     user=models.ForeignKey(UserProfile)
     
