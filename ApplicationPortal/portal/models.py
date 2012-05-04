@@ -23,7 +23,7 @@ class Question(models.Model):
     Creates a question for an event
     """
     question=models.CharField(_('Question'), max_length=255)
-    event=models.ManyToManyField(Event)
+    event=models.ForeignKey(Event)
     
     def __unicode__(self):
         return self.question

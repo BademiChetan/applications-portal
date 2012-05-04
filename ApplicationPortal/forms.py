@@ -3,13 +3,40 @@ from django.contrib.auth.models import Group
 from django.forms.widgets import CheckboxSelectMultiple()
 from applications-portal.ApplicationPortal.portal.models import Events
 from portal.models import *
+from django.utils import html
+
+'''
+This is to define a submit button within a form field so that each preference has a submit button.
+
+Usage:
+
+SubmitButtonField(label="", initial=u"Your submit button text")
+
+
+class SubmitButtonWidget(forms.Widget):
+    def render(self, name, value, attrs=None):
+        return '<input type="submit" name="%s" value="%s">' % (html.escape(name), html.escape(value))
+
+
+class SubmitButtonField(forms.Field):
+    def __init__(self, *args, **kwargs):
+        if not kwargs:
+            kwargs = {}
+        kwargs["widget"] = SubmitButtonWidget
+
+        super(SubmitButtonField, self).__init__(*args, **kwargs)
+
+    def clean(self, value):
+        return value
+        
+'''        
 
 class Loginform(forms.Form):
     username=forms.CharField()
     password=forms.CharField(widget=forms.PasswordInput)
 
 class Preferenceform(forms.Form):
-    preference1=forms.ModelChoiceField(queryset=Events.objects.all()) #from models they shd send the name of the event alone
+    preference1=forms.ModelChoiceField(queryset=Events.objects.all()) #from models they should send the name of the event alone
     preference2=forms.ModelChoiceField(queryset=Events.objects.all()) 
     preference3=forms.ModelChoiceField(queryset=Events.objects.all()) 
 
@@ -73,5 +100,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = {'is_core'}
-        
+
+
 

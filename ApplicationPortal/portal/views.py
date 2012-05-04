@@ -7,7 +7,7 @@ from django.core.context_processors import csrf
 from portal.models import *
 from django.shortcuts import *
 from django import forms
-from forms import*
+from ../forms import *
 
     		
 def register(request):
@@ -40,53 +40,36 @@ def home(request):
 		return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
     return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
 
-def super_home(request):
-    """
-    To display super user's home page.  This page will have tables of core details and groups.
-    The super user can add/edit a group and its permissions
- 
-    """
-    if(request.method=='POST'):
-        try:
-            request.POST['add']=="Add"
-        except:
-            try:
-                temp=request.POST['Edit']
-            except:
-                temp=request.POST['Del']
-                return redirect('/delgroup/'+temp)
-            return redirect('/editgroup/'+temp)
-        return redirect('/addgroup')
-    group=Group.objects.all()
-    #Add core object here
-    return render_to_response('super_home.html',locals(),context_instance= RequestContext(request))
-
-def addgroup(request, temp):
-    """
-    Adds a group through the addgroup form to the Group Model
-    
-    """
-    if request.method == 'POST':
-		form = AddGroup(request.POST)
-		if form.is_valid():
-			new_group = form.save()
-			return HttpResponseRedirect('/super_home/')
-			
-	else:
-		form = AddGroup()
-	return render_to_response('addgroup.html',{'form':form,},context_instance=RequestContext(request))
    
-    
-@Coords_Only    
+#@Coords_Only    
 def coord_home(request):
-    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    user=UserProfile.objects.get(UserProfile.user=request.user)
+    
+    if(request.method=='POST'):
+        choice=request.POST['choice']
+        return render_to_response("answers.html",{'choice':choice})
+        
     return render_to_response("home.html",{'user':user})
     
-@Cores_Only
-def core_home(request):
-    user=UserProfile.objects.get(UserProfile.username=str(request.user))
-    return render_to_response("home.html",{'user':user})    
+#@Cores_Only
+def core_question_add(request,idofevent,questionid=None):
+    if request.method=='POST':
+        event=Event.objects.get(Event.id=idofevent)
+        question=request.POST['question']
+        Question.objects.create(Question=question, event=event)
+        added=True
+        return render_to_response('addquestion.html', locals())
     
-    	
-
-
+    event=Event.objects.get(Event.id=idofevent)
+    if questionid is not None:
+        added=False
+        question=Question.objects.get(Question.id=questionid)  
+        return render_to_response('addquestion.html',locals(),context_instance=RequestContext(request))      	
+    added = False
+    return render_to_response('addquestion.html',locals(),context_instance=RequestContext(request))
+    
+#@Cores_Only
+def core_question_add_existing(request,idofevent)
+    all_questions=Question.objects.all()
+    return render_to_response('viewquestion.html',locals(),context_instance=RequestContext(request))
+    
