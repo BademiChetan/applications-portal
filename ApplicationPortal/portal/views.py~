@@ -44,6 +44,10 @@ def home(request):
         user = authenticate(username=request.POST['username'],password=request.POST['password'])
         if user is not None:
             login(request, user)
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+>>>>>>> 2f7eb723cb645b8f95aaa324e4f4155cca2d5e35
             curr_user = UserProfile.objects.get(user=request.user)
             if request.user.is_superuser:
                 return HttpResponseRedirect("/super_home/")
@@ -55,6 +59,23 @@ def home(request):
     	else:#Must create Invalid message display
     	    return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
     return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
+<<<<<<< HEAD
+=======
+=======
+            temp = UserProfile.objects.get(user=request.user)
+            if temp.is_core==False:
+                
+                return render_to_response("coord_home.html",locals(),context_instance=RequestContext(request))
+            else:
+                user=UserProfile.objects.get(user=request.user)
+                event=Event.objects.filter(group=user.group)
+                return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
+    	else:
+            invalid_login=1
+    return render_to_response("home.html",locals(),context_instance=RequestContext(request))
+>>>>>>> Stashed changes
+
+>>>>>>> 2f7eb723cb645b8f95aaa324e4f4155cca2d5e35
 
 
 def super_home(request):
@@ -89,21 +110,24 @@ def addgroup(request, temp):
 			new_group = form.save()
 			return HttpResponseRedirect('/super_home/')
 			
-	else:
-		form = AddGroup()
-	return render_to_response('addgroup.html',{'form':form,},context_instance=RequestContext(request))
+    else:
+	    form = AddGroup()
+    return render_to_response('addgroup.html',{'form':form,},context_instance=RequestContext(request))
    
     
 @Coords_Only    
 def coord_home(request):
-    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    user=UserProfile.objects.get(user=request.user)
     return render_to_response("home.html",{'user':user})
     
 @Cores_Only
 def core_home(request):
-    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    user=UserProfile.objects.get(user=request.user)
     return render_to_response("home.html",{'user':user})    
-    
-    	
 
+@Cores_Only    
+def viewevent(request):
+    if request.method == 'POST':    	
+        pref_no = request.POST['preference']
+    return render_to_response("pref_choice.html",locals())
 
