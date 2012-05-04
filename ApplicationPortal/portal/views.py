@@ -40,16 +40,6 @@ def home(request):
 		return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
     return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
 
-   
-#@Coords_Only    
-def coord_home(request):
-    user=UserProfile.objects.get(UserProfile.user=request.user)
-    
-    if(request.method=='POST'):
-        choice=request.POST['choice']
-        return render_to_response("answers.html",{'choice':choice})
-        
-    return render_to_response("home.html",{'user':user})
     
 #@Cores_Only
 def core_question_add(request,idofevent,questionid=None):
