@@ -1,6 +1,22 @@
 <html>
+<<<<<<< HEAD
 Hello {{user.username}} !!
 {% for i in events %}
 <tr><td><a href="/viewevents/{{ i.name }}/">i.name</a></td></tr>
 
+=======
+<body>
+Welcome {{user}}!
+<br/>
+<table>
+<tr>
+{% for e in event %}
+<td>
+<a href="/{{ e.id }}/">{{ e.name }}</a>
+</td>
+{% endfor %}
+</tr>
+</table>
+</body>
+>>>>>>> fc2a9103a69d6cb1093e2a9282373ce1a1c8aac7
 </html>

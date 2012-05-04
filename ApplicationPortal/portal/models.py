@@ -5,6 +5,21 @@ from django.contrib.auth.models import *
 import datetime
 # Create your models here.
 
+class UserProfile(models.Model):
+    """
+    Userprofile
+    """    
+    user=models.ForeignKey(User)
+    rollno=models.CharField(max_length=20)   
+    roomnumber=models.CharField(max_length=20)
+    hostel=models.CharField(max_length=20)
+    ph_no=models.BigIntegerField(max_length=23)    
+    is_core=models.BooleanField(default=False)
+    group=models.ForeignKey(Group)
+    
+    def __unicode__(self):
+        return self.user
+   
 class Event(models.Model):
     """
     Creates an event for a specific Type
@@ -23,7 +38,7 @@ class Question(models.Model):
     Creates a question for an event
     """
     question=models.CharField(max_length=255)
-    event=models.ManyToManyField(Event)
+    event=models.ForeignKey(Event)
     
     def __unicode__(self):
         return self.question
@@ -42,7 +57,7 @@ class Credentials(models.Model):
     """
     Credentials for a user 
     """
-    user=models.ForeignKey(User)
+    user=models.ForeignKey(UserProfile)
     content=models.CharField(max_length=255)
     
     def __unicode__(self):
@@ -52,7 +67,7 @@ class References(models.Model):
     """
     References for a user 
     """
-    user=models.ForeignKey(User)
+    user=models.ForeignKey(UserProfile)
     content=models.CharField(max_length=255)
     
     def __unicode__(self):
@@ -63,12 +78,14 @@ class Choice(models.Model): #modifications required
     Each user has three choices.
     """
 
+
     
 
-    choice=models.ForeignKey(Event)
+    
+    event=models.ForeignKey(Event)
     pref_no=models.IntegerField()
+    user=models.ForeignKey(UserProfile)
 
-    user=models.ForeignKey(User)
     
     def __unicode__(self):
         return self.user
@@ -77,25 +94,11 @@ class Answer(models.Model):
     """
     Each answer represents a response by a user to a question
     """
-    user=models.ForeignKey(User)
+    user=models.ForeignKey(UserProfile)
     question=models.ForeignKey(Question)
     answer=models.CharField(max_length=255)
     
     def __unicode__(self):
         return self.answer
     
-class UserProfile(models.Model):
-    """
-    Userprofile
-    """    
-    user=models.ForeignKey(User)
-    rollno=models.CharField(max_length=20)   
-    roomnumber=models.CharField(max_length=20)
-    hostel=models.CharField(max_length=20)
-    ph_no=models.BigIntegerField(max_length=23)    
-    is_core=models.BooleanField(default=False)
-    group=models.ForeignKey(Group)
-    
-    def __unicode__(self):
-        return self.username
-    
+

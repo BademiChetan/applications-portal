@@ -13,8 +13,15 @@ urlpatterns = patterns('',
     url(r'^addgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.addgroup', name='addgroup'),
     url(r'^delgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.delgroup', name='delgroup'),
     url(r'^editgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
+
     url(r'^editeventname/(\d+)/$','ApplicationPortal.portal.views.editeventname',name='editeventname'),
     url(r'^addevent/$','ApplicationPortal.portal.views.addevent',name='addevent'),
+
+    url(r'^viewapplication/(?P<temp>([A-Z a-z]))/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
+
+    url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
+
+
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
