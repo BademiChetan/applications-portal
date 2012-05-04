@@ -15,6 +15,7 @@ class UserProfile(models.Model):
     hostel=models.CharField(max_length=20)
     ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
+    
     group=models.ForeignKey(Group)
     
     def __unicode__(self):
@@ -80,6 +81,7 @@ class Choice(models.Model): #modifications required
     event=models.ForeignKey(Event)
     pref_no=models.IntegerField()
     user=models.ForeignKey(UserProfile)
+    is_accepted=models.BooleanField(default=False)
     
     def __unicode__(self):
         return self.user

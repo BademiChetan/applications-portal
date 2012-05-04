@@ -110,11 +110,10 @@ def core_home(request):
 
     
     	
-def viewapplication(request,temp):
-    users=UserProfile.objects.get(UserProfile.username=temp)
-    choice=Choice.objects.get(Choice.user=users)
-    questions=Question.objects.get(Question.event=choice.choice)
-    answers=Answer.objects.get(Answer.useer=users,Answer.question=questions)
+def viewapplication(request, event_id, user_id): #Ramnandan and Jana - need to display question and answer
+    questions=Question.objects.filter(event.id=event_id)
+    for q in questions:
+        answer=Answer.objects.get(user.id=user_id, question=q)
     return render_to_response('view_application.html',locals(),context_instance= RequestContext(request))
 
 
@@ -125,7 +124,7 @@ def viewevent(request,event_id):
             pref_no = request.POST['preference']
             choice.Choice.objects.filter(pref_no=pref_no,event=event)
         if 'accept' in request.POST:
-            pass#needs to be done
+            
         if 'reject' in request.POST:
             pass#needs to be done. Accept values from checkbox
     return render_to_response("pref_choice.html",locals())

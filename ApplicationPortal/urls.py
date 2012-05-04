@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^delgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.delgroup', name='delgroup'),
     url(r'^editgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
 
-    url(r'^viewapplication/(?P<temp>([A-Z a-z]))/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
+    url(r'^viewapplication/(\d+)/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
 
     url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
 
