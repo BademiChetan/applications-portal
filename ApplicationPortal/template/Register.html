@@ -1,0 +1,13 @@
+<html>
+<head>
+<b><center>Login Page</b><br/></center></head>
+<body>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{Loginform.as_table}}
+    </table>
+    <input type="submit" value="Submit">
+</form>	
+</body>
+</html>
