@@ -16,6 +16,8 @@ urlpatterns = patterns('',
     url(r'^addquestion/(\d+)/(\d+)/$', core_question_add)
     url(r'^viewapplication/(\d+)/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
     url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
+    url(r'^judgementday/$', judgementday),
+    url(r'^judgementday/(\d+)/$', judgementday), #Final list of selected candidates
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

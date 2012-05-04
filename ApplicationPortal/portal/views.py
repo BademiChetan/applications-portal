@@ -81,7 +81,7 @@ def core_question_add(request,idofevent,questionid=None):
     return render_to_response('addquestion.html',locals(),context_instance=RequestContext(request))
     
 #@Cores_Only
-def core_question_add_existing(request,idofevent)
+def core_question_add_existing(request,idofevent):
     all_questions=Question.objects.all()
     return render_to_response('viewquestion.html',locals(),context_instance=RequestContext(request))
     
@@ -130,4 +130,16 @@ def viewevent(request,event_id):
     return render_to_response("pref_choice.html",locals())
 
     
-'''
+"""
+
+def judgementday(request,eventid=None):
+    events=Event.objects.all()
+    if eventid is not None:
+        event=Event.objects.get(Event.id=eventid)
+        accepted=Choice.objects.filter(event.id=eventid, is_accepted=1)
+        
+    return render_to_response("final.html",locals())
+
+
+
+
