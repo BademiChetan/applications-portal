@@ -23,7 +23,7 @@ class Question(models.Model):
     Creates a question for an event
     """
     question=models.CharField(max_length=255)
-    event=models.ManyToManyField(Event)
+    event=models.ForeignKey(Event)
     
     def __unicode__(self):
         return self.question
@@ -42,7 +42,7 @@ class Credentials(models.Model):
     """
     Credentials for a user 
     """
-    user=models.ForeignKey(User)
+    user=models.ForeignKey(UserProfile)
     content=models.CharField(max_length=255)
     
     def __unicode__(self):
@@ -52,7 +52,7 @@ class References(models.Model):
     """
     References for a user 
     """
-    user=models.ForeignKey(User)
+    user=models.ForeignKey(UserProfile)
     content=models.CharField(max_length=255)
     
     def __unicode__(self):
@@ -62,9 +62,9 @@ class Choice(models.Model): #modifications required
     """   
     Each user has three choices.
     """
-    choice=models.ForeignKey(Event)
+    event=models.ForeignKey(Event)
     pref_no=models.IntegerField()
-    user=models.ForeignKey(User)
+    user=models.ForeignKey(UserProfile)
     
     def __unicode__(self):
         return self.user
@@ -73,7 +73,7 @@ class Answer(models.Model):
     """
     Each answer represents a response by a user to a question
     """
-    user=models.ForeignKey(User)
+    user=models.ForeignKey(UserProfile)
     question=models.ForeignKey(Question)
     answer=models.CharField(max_length=255)
     

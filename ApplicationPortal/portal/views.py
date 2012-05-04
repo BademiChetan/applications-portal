@@ -45,6 +45,7 @@ def home(request):
         if user is not None:
             login(request, user)
 
+
             curr_user = UserProfile.objects.get(user=request.user)
             if request.user.is_superuser:
                 return HttpResponseRedirect("/super_home/")
@@ -52,23 +53,12 @@ def home(request):
       	        if curr_user.is_core==False:
                     return HttpResponseRedirect("/coord_home/")
                 else:
-                    return HttpResponseRedirect("/core_home/")   
-    	else:#Must create Invalid message display
-    	    return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
-    return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
-
-            temp = UserProfile.objects.get(user=request.user)
-            if temp.is_core==False:
-                
-                return render_to_response("coord_home.html",locals(),context_instance=RequestContext(request))
-            else:
-                user=UserProfile.objects.get(user=request.user)
-                event=Event.objects.filter(group=user.group)
-                return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
+                    user=UserProfile.objects.get(user=request.user)
+                    event=Event.objects.filter(group=user.group)
+                    return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
     	else:
             invalid_login=1
     return render_to_response("home.html",locals(),context_instance=RequestContext(request))
-
 
 
 def super_home(request):
@@ -119,8 +109,14 @@ def core_home(request):
     return render_to_response("home.html",{'user':user})    
 
 @Cores_Only    
-def viewevent(request):
-    if request.method == 'POST':    	
-        pref_no = request.POST['preference']
+def viewevent(request,event_id):
+    if request.method == 'POST':  
+        if 'prefchoice' in request.POST:  	
+            pref_no = request.POST['preference']
+            choice.Choice.objects.filter(pref_no=pref_no,event=event)
+        if 'accept' in request.POST:
+            pass#needs to be done
+        if 'reject' in request.POST:
+            pass#needs to be done. Accept values from checkbox
     return render_to_response("pref_choice.html",locals())
 

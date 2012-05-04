@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 
     url(r'^viewapplication/(?P<temp>([A-Z a-z]))/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
 
-    url(r'^core/viewevent/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
+    url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
 
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
