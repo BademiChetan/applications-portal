@@ -11,9 +11,11 @@ class UserProfile(models.Model):
     """    
     user=models.ForeignKey(User)
     rollno=models.CharField(max_length=20)   
+    roomnumber=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
     ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
+    #group=models.ForeignKey(Group)
     cgpa=models.IntegerField()
     room_number=models.IntegerField()
     email=models.EmailField()
@@ -96,4 +98,17 @@ class Answer(models.Model):
     
     def __unicode__(self):
         return self.answer
-
+    
+class UserProfile(models.Model):
+    """
+    Userprofile
+    """    
+    user=models.ForeignKey(User)
+    rollno=models.CharField(max_length=20)   
+    roomnumber=models.CharField(max_length=20)
+    hostel=models.CharField(max_length=20)
+    ph_no=models.BigIntegerField(max_length=23)    
+    is_core=models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return self.username
