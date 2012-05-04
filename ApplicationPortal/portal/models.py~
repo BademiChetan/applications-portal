@@ -9,7 +9,7 @@ class Event(models.Model):
     """
     Creates an event for a specific Type
     """
-    name=models.CharField(('Event'), max_length=255, unique=True)
+    name=models.CharField(max_length=255, unique=True)
     group=models.ForeignKey(Group)
     
     def __unicode__(self):
@@ -22,7 +22,7 @@ class Question(models.Model):
     """
     Creates a question for an event
     """
-    question=models.CharField(('Question'), max_length=255)
+    question=models.CharField(max_length=255)
     event=models.ManyToManyField(Event)
     
     def __unicode__(self):
@@ -32,7 +32,7 @@ class Update(models.Model):
     """
     Creates an object to post an update
     """
-    update_text=models.CharField(('Update'), max_length=255)
+    update_text=models.CharField(max_length=255)
     timestamp=models.DateTimeField(default=datetime.datetime.now)
     
     def __unicode__(self):
@@ -43,7 +43,7 @@ class Credentials(models.Model):
     Credentials for a user 
     """
     user=models.ForeignKey(User)
-    content=models.CharField(('Credentials'), max_length=255)
+    content=models.CharField(max_length=255)
     
     def __unicode__(self):
         return self.content
@@ -53,7 +53,7 @@ class References(models.Model):
     References for a user 
     """
     user=models.ForeignKey(User)
-    content=models.CharField(('References'), max_length=255)
+    content=models.CharField(max_length=255)
     
     def __unicode__(self):
         return self.content

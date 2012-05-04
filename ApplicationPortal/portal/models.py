@@ -93,5 +93,5 @@ class UserProfile(models.Model):
     group=models.ForeignKey(Group)
     
     def __unicode__(self):
-        return self.username
+        return self.user
     

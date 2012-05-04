@@ -13,7 +13,11 @@ urlpatterns = patterns('',
     url(r'^addgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.addgroup', name='addgroup'),
     url(r'^delgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.delgroup', name='delgroup'),
     url(r'^editgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
-    url(r'^viewapplications/(?P<temp>([A-Z a-z]))/$', 'ApplicationPortal.portal.views.viewapplications', name='viewapplications'),
+<<<<<<< Updated upstream
+    url(r'^viewapplication/(?P<temp>([A-Z a-z]))/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
+=======
+    url(r'^core/viewevent/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
+>>>>>>> Stashed changes
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
