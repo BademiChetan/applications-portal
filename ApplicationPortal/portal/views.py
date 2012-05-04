@@ -9,6 +9,10 @@ from django.shortcuts import *
 from django import forms
 from ../forms import *
 
+def logout(request):
+	logout(request)
+	return render_to_response('logout.html',locals(),context_instance=RequestContext(request))
+	
     		
 def register(request):
 	if request.method == 'POST':
