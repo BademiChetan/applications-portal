@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<TITLE>Application Portal</TITLE>
+</HEAD>
+<BODY>
+<H1> Coordinator's Application Portal </H1>
+Hello {{user.username}},
+Enter your Preferences Below:<br>
+<br>
+{{PreferenceForm.as_table}}
+<br>
+   
+    <form action="" method="post">
+            
+            <button type="submit" name="choice" value={{PreferenceForm.preference1}}>Fill answers for Pref 1</button>
+   
+            <button type="submit" name="choice" value={{PreferenceForm.preference1}}>Fill answers for Pref 2</button>
+   
+            <button type="submit" name="choice" value={{PreferenceForm.preference1}}>Fill answers for Pref 3</button>
+     </form>
+   
+<br>
+</BODY>
+</HTML>

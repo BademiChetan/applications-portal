@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-
+from portal.views import *
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -14,15 +14,20 @@ urlpatterns = patterns('',
     url(r'^delgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.delgroup', name='delgroup'),
     url(r'^editgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
 <<<<<<< HEAD
+
     url(r'^editeventname/(\d+)/$','ApplicationPortal.portal.views.editeventname',name='editeventname'),
     url(r'^addevent/$','ApplicationPortal.portal.views.addevent',name='addevent'),
-=======
 
     url(r'^viewapplication/(?P<temp>([A-Z a-z]))/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
 
     url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
 
->>>>>>> fc2a9103a69d6cb1093e2a9282373ce1a1c8aac7
+
+=======
+    url(r'^addquestion/(\d+)/(\d+)/$', core_question_add)
+    url(r'^viewapplication/(\d+)/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
+    url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
+>>>>>>> fb872b9c6d1867a1895e31872613d926200394ce
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

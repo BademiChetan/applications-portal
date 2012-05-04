@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-
+from portal.views import *
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^delgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.delgroup', name='delgroup'),
     url(r'^editgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
 
+
     url(r'^editeventname/(\d+)/$','ApplicationPortal.portal.views.editeventname',name='editeventname'),
     url(r'^addevent/$','ApplicationPortal.portal.views.addevent',name='addevent'),
 
@@ -21,6 +22,10 @@ urlpatterns = patterns('',
 
     url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
 
+
+    url(r'^addquestion/(\d+)/(\d+)/$', core_question_add)
+    url(r'^viewapplication/(\d+)/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
+    url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
 
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
