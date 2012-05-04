@@ -60,7 +60,7 @@ class Choice(models.Model): #modifications required
     """   
     Each user has three choices.
     """
-    choice1=choice2=choice3=models.ForeignKey(Event)
+    hippo1=hippo2=hippo3=models.ForeignKey(Event)
     user=models.ForeignKey(User)
     
     def __unicode__(self):
