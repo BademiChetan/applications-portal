@@ -5,5 +5,5 @@
 *~
 
 #Ignore the settings file, which is different for all of us.
-settings.py
+local_settings.py
 
