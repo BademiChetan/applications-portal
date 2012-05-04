@@ -17,7 +17,9 @@ urlpatterns = patterns('',
     url(r'^addevent/$','ApplicationPortal.portal.views.addevent',name='addevent'),
     url(r'^core/(\d+)/$', 'ApplicationPortal.portal.views.viewevent', name='viewevent'),
     url(r'^addquestion/(\d+)/(\d+)/$', core_question_add),
-
+    url(r'^judgementday/$', judgementday),
+    url(r'^judgementday/(\d+)/$', judgementday), #Final list of selected candidates
+    url(r'^addquestion/(\d+)/(\d+)/$', core_question_add),
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

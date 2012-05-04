@@ -131,7 +131,7 @@ def addevent(request):
     user=UserProfile.objects.get(UserProfile.username=str(request.user))
     p=user.group.event_set.all()
     if request.method=='POST':
-        if request.POST.get('eventname','')
+        if request.POST.get('eventname',''):
             event=Event.create(name=request.POST.get('eventname'),group=user.group)
             p=user.group.event_set.all()
             return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))
@@ -189,6 +189,16 @@ def judgementday(request,eventid=None):
         event=Event.objects.get(Event.id=eventid)
         accepted=Choice.objects.filter(event.id=eventid, is_accepted=1)
         
-    return render_to_response("final.html",locals())
-
-
+    return render_to_response("final.html",locals()) 
+def editquestion(request,questionid):
+    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    questionobj=Question.get(id=questionid)
+    if request.method=='POST':
+        if request.POST.get('content',''):
+            questionobj.question=request.POST.get('content')
+            return render_to_response("editquestion.html",locals(),context_instance=RequestContext(request))
+        else:
+            error=1
+            return render_to_response("editquestion.html",locals(),context_instance=RequestContext(request))
+    return render_to_response("editquestion.html",locals(),context_instance=RequestContext(request))
+    
