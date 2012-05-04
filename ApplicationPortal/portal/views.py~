@@ -147,7 +147,7 @@ def editeventname(request,temp):
     e=Event.get(id=temp)
     user=UserProfile.objects.get(UserProfile.username=str(request.user))
     if request.method=='POST':
-        if request.POST.get('eventname','')
+        if request.POST.get('eventname',''):
             e.name=request.POST.get('eventname')
             e.save()
         else:
@@ -155,6 +155,7 @@ def editeventname(request,temp):
             return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))   
     return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))
     user=UserProfile.objects.get(user=request.user)
+<<<<<<< HEAD
     return render_to_response("home.html",{'user':user})   
 
     
@@ -164,6 +165,14 @@ def viewapplication(request,temp):
     choice=Choice.objects.get(Choice.user=users)
     questions=Question.objects.get(Question.event=choice.choice)
     answers=Answer.objects.get(Answer.useer=users,Answer.question=questions
+=======
+    return render_to_response("home.html",{'user':user})    
+
+
+    
+@Cores_only    	
+
+>>>>>>> 41493e607d5bbfc06be255ebb5eb74adc102f2d2
     	
 def viewapplication(request, event_id, user_id):
     questions=Question.objects.filter(event.id=event_id)
@@ -187,15 +196,11 @@ def viewevent(request,event_id):
     return render_to_response("pref_choice.html",locals())
 
    
-def answer(request):
-    q=Question(question="hd2",event="a10")
-    q.save()
-    q=Question(question="hd5",event="a10")
-    q.save()
-    questions=Question.objects.filter(event="a10")
+def answer(request,event_id):
+    questions=Question.objects.filter(event.id=event_id)
     AnswerFormSet=inlineformset_factory(Question,Answer,extra=1)
     if (request.method=='POST'):
-        answerformset=AnswerFormSet(request.POST,request.FILES,queryset=Question.objects.filter(event="a10"))
+        answerformset=AnswerFormSet(request.POST,request.FILES,queryset=Question.objects.filter(event.id=event_id))
         if answerformset.is_valid():
             answerformset.save()   
 	    answers=Answer.objects.filter(question=questions) 
@@ -203,7 +208,7 @@ def answer(request):
 
     else:
 	
-            answerformset=AnswerFormSet(queryset=Question.objects.filter(event="a10"))
+            answerformset=AnswerFormSet(queryset=Question.objects.filter(event.id=event_id))
 	    
     return render_to_response('answer.html',{'answerformset':answerformset,'questions':questions},context_instance=RequestContext(request))
 

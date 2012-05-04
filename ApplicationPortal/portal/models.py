@@ -39,19 +39,12 @@ class Question(models.Model):
     Creates a question for an event
     """
     question=models.CharField(max_length=255)
-<<<<<<< Updated upstream
     event=models.ForeignKey(Event)
-=======
-    event=models.CharField(max_length=40)
->>>>>>> Stashed changes
     
     def __unicode__(self):
         return self.question
     
-<<<<<<< Updated upstream
-    def __unicode__(self):
-        return self.update_text
-        
+
 class Credentials(models.Model):
     """
     Credentials for a user 
@@ -81,12 +74,6 @@ class Choice(models.Model): #modifications required
     user=models.ForeignKey(UserProfile)
     is_accepted=models.IntegerField(default=0) #0-unevaluated,1-accepted,-1-rejected
 
-    
-    def __unicode__(self):
-        return self.user
-=======
-
->>>>>>> Stashed changes
 
 class Answer(models.Model):
     """
