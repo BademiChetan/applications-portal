@@ -108,6 +108,16 @@ def core_home(request):
     user=UserProfile.objects.get(user=request.user)
     return render_to_response("home.html",{'user':user})    
 
+    
+    	
+def viewapplication(request,temp):
+    users=UserProfile.objects.get(UserProfile.username=temp)
+    choice=Choice.objects.get(Choice.user=users)
+    questions=Question.objects.get(Question.event=choice.choice)
+    answers=Answer.objects.get(Answer.useer=users,Answer.question=questions)
+    return render_to_response('view_application.html',locals(),context_instance= RequestContext(request))
+
+
 @Cores_Only    
 def viewevent(request,event_id):
     if request.method == 'POST':  
@@ -120,3 +130,4 @@ def viewevent(request,event_id):
             pass#needs to be done. Accept values from checkbox
     return render_to_response("pref_choice.html",locals())
 
+    

@@ -6,8 +6,8 @@ the application of {{temp.username}} is as follows:
 
 {% for i in questions %}
     {% for j in answers %}
-	{{questions.question}}
-	{{answers.answer}}
+	{{questions.question}}<br/>
+	{{answers.answer}}<br/>
     {% endfor %}
 {% endfor %}
 </body>
