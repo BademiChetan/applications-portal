@@ -39,18 +39,16 @@ class Question(models.Model):
     Creates a question for an event
     """
     question=models.CharField(max_length=255)
+<<<<<<< Updated upstream
     event=models.ForeignKey(Event)
+=======
+    event=models.CharField(max_length=40)
+>>>>>>> Stashed changes
     
     def __unicode__(self):
         return self.question
-
-class Update(models.Model):
-    """
-    Creates an object to post an update
-    """
-    update_text=models.CharField(max_length=255)
-    timestamp=models.DateTimeField(default=datetime.datetime.now)
     
+<<<<<<< Updated upstream
     def __unicode__(self):
         return self.update_text
         
@@ -86,6 +84,9 @@ class Choice(models.Model): #modifications required
     
     def __unicode__(self):
         return self.user
+=======
+
+>>>>>>> Stashed changes
 
 class Answer(models.Model):
     """
