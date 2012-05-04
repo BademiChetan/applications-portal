@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.models import Group
 from django.forms.widgets import CheckboxSelectMultiple
-from ApplicationPortal.portal.models import Event
 from portal.models import *
 from django.utils import html
 
@@ -40,14 +39,13 @@ class Preferenceform(forms.Form):
     preference2=forms.ModelChoiceField(queryset=Event.objects.all()) 
     preference3=forms.ModelChoiceField(queryset=Event.objects.all()) 
 
-
-
-class Registrationform(forms.Form):
+class RegistrationForm(forms.Form):
     name=forms.CharField()
     rollnumber=forms.CharField()
     username=forms.CharField()
-    Password=forms.CharField(widget=forms.PasswordInput)
+    password=forms.CharField(widget=forms.PasswordInput)
     confirm_password=forms.CharField(widget=forms.PasswordInput)
+<<<<<<< HEAD
     cgpa=forms.IntegerField()
     room number=forms.IntergerField()
     email=EmailField()
@@ -58,11 +56,17 @@ class AddGroup(form.ModelForm):
     class Meta:
         model = Group
    	widgets={'permissions':forms.MultipleChoiceField(widget=CheckboxSelectMultiple())}
+=======
+    cgpa=forms.DecimalField(max_digits=4,decimal_places=2)
+    room_number=forms.IntegerField()
+    email=forms.EmailField()
+    hostel=forms.CharField()
+    phoneno=forms.IntegerField()
+>>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8
 
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
@@ -102,5 +106,20 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         exclude = {'is_core'}
 
-
+class AddGroup(forms.ModelForm):
+    class Meta:
+        model = Group
+	   
+class AddCore(forms.Form):
+    name=forms.CharField()
+    username=forms.CharField()
+    password=forms.CharField(widget=forms.PasswordInput)
+    confirm_password=forms.CharField(widget=forms.PasswordInput)
+    email=forms.EmailField()
+  
+class CoreUserProfile(forms.ModelForm):
+    class Meta:
+        model=UserProfile 
+        fields={'user', 'rollno', 'room_number', 'hostel', 'ph_no', 'is_core','cgpa',}     
+        widgets={'user':forms.HiddenInput(),}  
 

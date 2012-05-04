@@ -1,0 +1,9 @@
+#Ignore all the automatically generated files
+*.pyc
+.*.swp
+.*.swo
+*~
+
+#Ignore the settings file, which is different for all of us.
+local_settings.py
+

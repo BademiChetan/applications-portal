@@ -1,0 +1,18 @@
+<html>
+    	 <br/>
+{% if error %}
+	<strong>
+		You left the question content blank
+	</strong>
+{% endif %}  
+        <form action="" method="POST">    
+		{% csrf_token %}
+    		EventName:<input type="text" name="content" initial="questionid.question"/>
+                
+   		<input type="submit" value="Edit Question"/>
+    	</form>
+
+        
+
+
+</html>
