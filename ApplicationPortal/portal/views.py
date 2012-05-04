@@ -14,63 +14,57 @@ def register(request):
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
-			new_user = form.save()
+			inputs = form.cleaned_data
+			new_user = User(first_name=inputs['name'],username=inputs['username'],email=inputs['email'])
+			new_user.set_password(inputs['password'])
+			new_user.save()
+			new_user = authenticate(username=inputs['username'],password=inputs['password'])
+			login(request, new_user)
+			new_profile=UserProfile(user=User.objects.get(username=request.POST['username']),rollno=request.POST['rollnumber'],hostel=request.POST['hostel'],ph_no=request.POST['phoneno'],room_number=request.POST['room_number'],cgpa=request.POST['cgpa'])
+			new_profile.save()
 			return HttpResponseRedirect('/home/')
-			
 	else:
 		form = RegistrationForm()
-	return render_to_response('template/registration.html',{'form':form,},context_instance=RequestContext(request))
-
-
+	return render_to_response('Registration.html',locals(),context_instance=RequestContext(request))
 
 def home(request):
-    """
-    Home Page of Application Portal. Also has login. Part 1
-    checks if user is already logged in and then redirects
-    to the corresponding page. Part 2 is for logging in.
-    
-    """
-    if request.user.is_authenticated():
-        curr_user= UserProfile.objects.get(user=request.user)
-        if request.user.is_superuser:
-            return HttpResponseRedirect("/super_home/")
-        else:    
-      	    if curr_user.is_core==False:
-                return HttpResponseRedirect("/coord_home/")
-            else:
-                return HttpResponseRedirect("/core_home/")  
-		
-    if(request.method=='POST'):
-        user = authenticate(username=request.POST['username'],password=request.POST['password'])
-        if user is not None:
-            login(request, user)
+	"""
+	Home Page of Application Portal. Also has login. Part 1
+	checks if user is already logged in and then redirects
+	to the corresponding page. Part 2 is for logging in.
 
-            temp = UserProfile.objects.get(UserProfile.user=request.user)
-            if temp.is_core==False:
-                
-                return render_to_response("coord_home.html",locals(),context_instance=RequestContext(request))
-            else:
-                user=UserProfile.objects.get(UserProfile=str(request.user))
+	"""
+	if request.user.is_authenticated():
+		curr_user= UserProfile.objects.get(user=request.user)
+		if request.user.is_superuser:
+			return HttpResponseRedirect("/super_home/")
+		else: 
+			if curr_user.is_core==False:
+				return HttpResponseRedirect("/coord_home/")
+			else:
+				return HttpResponseRedirect("/core_home/")  
 
-                events=Event.objects.get(Event.group=user.group)
-                return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
-
-
-
-            curr_user = UserProfile.objects.get(user=request.user)
-            if request.user.is_superuser:
-                return HttpResponseRedirect("/super_home/")
-            else:    
-      	        if curr_user.is_core==False:
-                    return HttpResponseRedirect("/coord_home/")
-                else:
-                    user=UserProfile.objects.get(user=request.user)
-                    event=Event.objects.filter(group=user.group)
-                    return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
-
-    	else:
-            invalid_login=1
-    return render_to_response("home.html",locals(),context_instance=RequestContext(request))
+	if(request.method=='POST'):
+		form = Loginform(request.POST)
+		if form.is_valid():
+			inputs = form.cleaned_data
+			user = authenticate(username=inputs['username'],password=inputs['password'])
+			if user is not None:
+				login(request, user)
+				print request.user
+				curr_user = UserProfile.objects.get(user=request.user)
+				if request.user.is_superuser:
+					return HttpResponseRedirect("/super_home/")
+				else:    
+					if curr_user.is_core==False:
+						return HttpResponseRedirect("/coord_home/")
+					else:
+						return HttpResponseRedirect("/core_home/")
+			else:				
+				return render_to_response("Invalid.html",locals(),context_instance=RequestContext(request))       		
+	else:
+		form = Loginform()
+	return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
 
 
     
@@ -201,4 +195,8 @@ def editquestion(request,questionid):
             error=1
             return render_to_response("editquestion.html",locals(),context_instance=RequestContext(request))
     return render_to_response("editquestion.html",locals(),context_instance=RequestContext(request))
-    
+def deletequestion(request,questionid):
+    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    questionobj=Question.get(id=questionid)
+    questionobj.delete()  
+    return HttpResponse("Question Deleted")
