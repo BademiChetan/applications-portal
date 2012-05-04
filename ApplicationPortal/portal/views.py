@@ -10,8 +10,7 @@ from django import forms
 from forms import*
 
     		
-def register():
-	def register(request):
+def register(request):
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
@@ -47,10 +46,37 @@ def super_home(request):
     The super user can add/edit a group and its permissions
  
     """
+    if(request.method=='POST'):
+        try:
+            request.POST['add']=="Add"
+        except:
+            try:
+                temp=request.POST['Edit']
+            except:
+                temp=request.POST['Del']
+                return redirect('/delgroup/'+temp)
+            return redirect('/editgroup/'+temp)
+        return redirect('/addgroup')
     group=Group.objects.all()
     #Add core object here
     return render_to_response('super_home.html',locals(),context_instance= RequestContext(request))
 
+def addgroup(request, temp):
+    """
+    Adds a group through the addgroup form to the Group Model
+    
+    """
+    if request.method == 'POST':
+		form = AddGroup(request.POST)
+		if form.is_valid():
+			new_group = form.save()
+			return HttpResponseRedirect('/super_home/')
+			
+	else:
+		form = AddGroup()
+	return render_to_response('addgroup.html',{'form':form,},context_instance=RequestContext(request))
+   
+    
 @Coords_Only    
 def coord_home(request):
     user=UserProfile.objects.get(UserProfile.username=str(request.user))
@@ -62,3 +88,5 @@ def core_home(request):
     return render_to_response("home.html",{'user':user})    
     
     	
+
+

@@ -10,6 +10,9 @@ urlpatterns = patterns('',
     url(r'^core/$', 'ApplicationPortal.portal.views.core_home', name='core'),
     url(r'^coord/$', 'ApplicationPortal.portal.views.coord_home', name='coord'),
     url(r'^register/$', 'ApplicationPortal.portal.views.register', name='register'),
+    url(r'^addgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.addgroup', name='addgroup'),
+    url(r'^delgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.delgroup', name='delgroup'),
+    url(r'^editgroup/(?P<temp>\d+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
