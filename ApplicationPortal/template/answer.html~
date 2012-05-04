@@ -1,0 +1,23 @@
+<html>
+<head>
+<b><center>Questions</b></center>
+</head>
+
+<form action="" method='POST'>
+{% csrf_token %}
+
+{{ answerformset.management_form }}
+
+<table>
+{% for q in questions %}
+    <tr>{{q.question}}</tr>
+	
+           <tr> {{form.answer}}</tr>
+    <br/>
+<hr>
+{% endfor %}
+ </table>
+<input type='submit' value='submit'>
+</form>
+</html>
+

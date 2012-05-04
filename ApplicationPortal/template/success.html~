@@ -1,0 +1,9 @@
+<html>
+<body>
+success
+{% for i in answers %}
+    {{i.question.question}}
+    {{i.answer}}
+{% endfor %}
+</body>
+</html>
