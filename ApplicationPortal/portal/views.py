@@ -117,17 +117,16 @@ def coord_home(request):
 def core_home(request):
     user=UserProfile.objects.get(user=request.user)
     return render_to_response("home.html",{'user':user})    
-<<<<<<< HEAD
+
     
-    	
+@Cores_only    	
 def viewapplication(request,temp):
     users=UserProfile.objects.get(UserProfile.username=temp)
     choice=Choice.objects.get(Choice.user=users)
     questions=Question.objects.get(Question.event=choice.choice)
     answers=Answer.objects.get(Answer.useer=users,Answer.question=questions)
     return render_to_response('view_application.html',locals(),context_instance= RequestContext(request))
-=======
->>>>>>> 2f7eb723cb645b8f95aaa324e4f4155cca2d5e35
+
 
 @Cores_Only    
 def viewevent(request):
