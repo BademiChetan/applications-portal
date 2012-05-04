@@ -98,7 +98,7 @@ def core_question_add(request,idofevent,questionid=None):
     return render_to_response('addquestion.html',locals(),context_instance=RequestContext(request))
     
 #@Cores_Only
-def core_question_add_existing(request,idofevent)
+def core_question_add_existing(request,idofevent):
     all_questions=Question.objects.all()
     return render_to_response('viewquestion.html',locals(),context_instance=RequestContext(request))
 
@@ -140,31 +140,32 @@ def addevent(request):
             p=user.group.event_set.all()
             return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))   
     return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))
+    
 def editeventname(request,temp):
     e=Event.get(id=temp)
     user=UserProfile.objects.get(UserProfile.username=str(request.user))
     if request.method=='POST':
-        if request.POST.get('eventname','')
+        if request.POST.get('eventname',''):
             e.name=request.POST.get('eventname')
             e.save()
         else:
             error=1 
             return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))   
     return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))
-
-      
-
     user=UserProfile.objects.get(user=request.user)
     return render_to_response("home.html",{'user':user})    
 
 
     
+@Cores_only    	
+
     	
-def viewapplication(request,temp):
-    users=UserProfile.objects.get(UserProfile.username=temp)
-    choice=Choice.objects.get(Choice.user=users)
-    questions=Question.objects.get(Question.event=choice.choice)
-    answers=Answer.objects.get(Answer.useer=users,Answer.question=questions)
+def viewapplication(request, event_id, user_id):
+    questions=Question.objects.filter(event.id=event_id)
+    answers[]
+    for q in questions:
+        answers.append(Answer.objects.get(user.id=user_id, question=q))
+
     return render_to_response('view_application.html',locals(),context_instance= RequestContext(request))
 
 
@@ -175,10 +176,19 @@ def viewevent(request,event_id):
             pref_no = request.POST['preference']
             choice.Choice.objects.filter(pref_no=pref_no,event=event)
         if 'accept' in request.POST:
-            pass#needs to be done
+            pass
         if 'reject' in request.POST:
             pass#needs to be done. Accept values from checkbox
     return render_to_response("pref_choice.html",locals())
 
     
-'''
+
+def judgementday(request,eventid=None):
+    events=Event.objects.all()
+    if eventid is not None:
+        event=Event.objects.get(Event.id=eventid)
+        accepted=Choice.objects.filter(event.id=eventid, is_accepted=1)
+        
+    return render_to_response("final.html",locals())
+
+
