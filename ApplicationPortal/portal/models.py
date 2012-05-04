@@ -15,8 +15,10 @@ class UserProfile(models.Model):
     hostel=models.CharField(max_length=20)
     ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
-    
-    group=models.ForeignKey(Group)
+    #group=models.ForeignKey(Group)
+    cgpa=models.IntegerField()
+    room_number=models.IntegerField()
+    email=models.EmailField()
     
     def __unicode__(self):
         return self.user
