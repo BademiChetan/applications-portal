@@ -1,0 +1,14 @@
+<html>
+<head>
+<b><center>LOG IN</b><br/></center></head>
+<body>
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <input type="submit" value="LOGIN">
+</form>	
+<a href="http://127.0.0.1:8000/register/">Register </a>
+</body>
+</html>
