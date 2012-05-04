@@ -1,0 +1,18 @@
+<html>
+{% for event in events %}
+<a href="/judgementday/{{event.id}}/"> event </a> <br>
+{% endfor %}
+
+{% if eventid %}
+Selected Candidates for {{accepted.event}} are-
+{% for candidates in accepted %}
+{{candidate.user.user.first_name}}
+{{candidate.user.user.last_name}}
+{{candidate.user.hostel}}
+{{candidate.user.ph_no}}
+{{candidate.user.rollno}}
+<br>
+{% endfor %}
+{% endif %}
+</html>
+

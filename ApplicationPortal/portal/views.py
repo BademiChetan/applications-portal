@@ -7,7 +7,7 @@ from django.core.context_processors import csrf
 from portal.models import *
 from django.shortcuts import *
 from django import forms
-from forms import*
+from ../forms import *
 
     		
 def register(request):
@@ -45,6 +45,18 @@ def home(request):
         if user is not None:
             login(request, user)
 
+            temp = UserProfile.objects.get(UserProfile.user=request.user)
+            if temp.is_core==False:
+                
+                return render_to_response("coord_home.html",locals(),context_instance=RequestContext(request))
+            else:
+                user=UserProfile.objects.get(UserProfile=str(request.user))
+
+                events=Event.objects.get(Event.group=user.group)
+                return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
+
+
+
             curr_user = UserProfile.objects.get(user=request.user)
             if request.user.is_superuser:
                 return HttpResponseRedirect("/super_home/")
@@ -52,49 +64,44 @@ def home(request):
       	        if curr_user.is_core==False:
                     return HttpResponseRedirect("/coord_home/")
                 else:
-                    return HttpResponseRedirect("/core_home/")   
-    	else:#Must create Invalid message display
-    	    return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
-    return render_to_response("Home.html",locals(),context_instance=RequestContext(request))
+                    user=UserProfile.objects.get(user=request.user)
+                    event=Event.objects.filter(group=user.group)
+                    return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
 
-            temp = UserProfile.objects.get(user=request.user)
-            if temp.is_core==False:
-                
-                return render_to_response("coord_home.html",locals(),context_instance=RequestContext(request))
-            else:
-                user=UserProfile.objects.get(user=request.user)
-                event=Event.objects.filter(group=user.group)
-                return render_to_response("core_home.html",locals(),context_instance=RequestContext(request))   
     	else:
             invalid_login=1
     return render_to_response("home.html",locals(),context_instance=RequestContext(request))
 
 
+    
 
-def super_home(request):
-    """
-    To display super user's home page.  This page will have tables of core details and groups.
-    The super user can add/edit a group and its permissions
- 
-    """
-    if(request.method=='POST'):
-        try:
-            request.POST['add']=="Add"
-        except:
-            try:
-                temp=request.POST['Edit']
-            except:
-                temp=request.POST['Del']
-                return redirect('/delgroup/'+temp)
-            return redirect('/editgroup/'+temp)
-        return redirect('/addgroup')
-    group=Group.objects.all()
-    #Add core object here
-    return render_to_response('super_home.html',locals(),context_instance= RequestContext(request))
 
 def addgroup(request, temp):
     """
-    Adds a group through the addgroup form to the Group Model
+    Adds a group through the addgroup form to the Group Model 
+
+#@Cores_Only
+def core_question_add(request,idofevent,questionid=None):
+    if request.method=='POST':
+        event=Event.objects.get(Event.id=idofevent)
+        question=request.POST['question']
+        Question.objects.create(Question=question, event=event)
+        added=True
+        return render_to_response('addquestion.html', locals())
+    
+    event=Event.objects.get(Event.id=idofevent)
+    if questionid is not None:
+        added=False
+        question=Question.objects.get(Question.id=questionid)  
+        return render_to_response('addquestion.html',locals(),context_instance=RequestContext(request))      	
+    added = False
+    return render_to_response('addquestion.html',locals(),context_instance=RequestContext(request))
+    
+#@Cores_Only
+def core_question_add_existing(request,idofevent):
+    all_questions=Question.objects.all()
+    return render_to_response('viewquestion.html',locals(),context_instance=RequestContext(request))
+
     
     """
     if request.method == 'POST':
@@ -115,8 +122,39 @@ def coord_home(request):
     
 @Cores_Only
 def core_home(request):
+
+    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    return render_to_response("home.html",{'user':user})  
+
+def addevent(request):
+    
+    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    p=user.group.event_set.all()
+    if request.method=='POST':
+        if request.POST.get('eventname','')
+            event=Event.create(name=request.POST.get('eventname'),group=user.group)
+            p=user.group.event_set.all()
+            return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))
+        else:
+            error=1 
+            p=user.group.event_set.all()
+            return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))   
+    return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))
+    
+def editeventname(request,temp):
+    e=Event.get(id=temp)
+    user=UserProfile.objects.get(UserProfile.username=str(request.user))
+    if request.method=='POST':
+        if request.POST.get('eventname','')
+            e.name=request.POST.get('eventname')
+            e.save()
+        else:
+            error=1 
+            return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))   
+    return render_to_response("addevent.html",locals(),context_instance=RequestContext(request))
     user=UserProfile.objects.get(user=request.user)
     return render_to_response("home.html",{'user':user})    
+<<<<<<< HEAD
 
     
 @Cores_only    	
@@ -125,13 +163,37 @@ def viewapplication(request,temp):
     choice=Choice.objects.get(Choice.user=users)
     questions=Question.objects.get(Question.event=choice.choice)
     answers=Answer.objects.get(Answer.useer=users,Answer.question=questions)
+=======
+    	
+def viewapplication(request, event_id, user_id):
+    questions=Question.objects.filter(event.id=event_id)
+    answers[]
+    for q in questions:
+        answers.append(Answer.objects.get(user.id=user_id, question=q))
+>>>>>>> 30c184336b1ab9298b208d93e580141e995c6335
     return render_to_response('view_application.html',locals(),context_instance= RequestContext(request))
 
 
 @Cores_Only    
-def viewevent(request):
-    if request.method == 'POST':    	
-        pref_no = request.POST['preference']
+def viewevent(request,event_id):
+    if request.method == 'POST':  
+        if 'prefchoice' in request.POST:  	
+            pref_no = request.POST['preference']
+            choice.Choice.objects.filter(pref_no=pref_no,event=event)
+        if 'accept' in request.POST:
+            pass
+        if 'reject' in request.POST:
+            pass#needs to be done. Accept values from checkbox
     return render_to_response("pref_choice.html",locals())
 
     
+
+def judgementday(request,eventid=None):
+    events=Event.objects.all()
+    if eventid is not None:
+        event=Event.objects.get(Event.id=eventid)
+        accepted=Choice.objects.filter(event.id=eventid, is_accepted=1)
+        
+    return render_to_response("final.html",locals())
+
+
