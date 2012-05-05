@@ -1,0 +1,11 @@
+<html>
+    <center><b>Edit Group</center></b><br/>      
+    <form action="" method='POST'>
+	<table>
+        {% csrf_token %}
+        {{form.as_table}}         
+        </table>
+        <button type ='submit' name="Submit" value='Save'>Save</button>
+        <button type="submit" name="Submit" value="Add">Add Core</button>
+    </form>   
+</html>
