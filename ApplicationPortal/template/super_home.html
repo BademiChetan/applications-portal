@@ -1,0 +1,24 @@
+<html>
+<body>
+<a href='/logout'>Logout</a>
+<form action="" method="POST">
+	{% csrf_token %}
+    <table border="1" id="groups">
+    <thead>
+    <tr>
+        <th>Group Name</th>
+    </tr>
+    </thead>
+
+    {% for g in grp %}
+        <tr>
+            <td>{{g}}</td>
+            <td><button type="submit" name="Edit" value="{{g}}" >Edit</button></td>
+	        <td><button type="submit" name="Del" value="{{g}}" >Delete</button></td>
+            
+    {% endfor %}
+</table><br/>
+<button type="submit" name="Add" value="Add">Add Group</button>
+</form>
+
+</body>
