@@ -1,6 +1,7 @@
 <html>
 <body>
 success
+<hr>
 {% for i in answers %}
     {{i.question.question}}
     {{i.answer}}

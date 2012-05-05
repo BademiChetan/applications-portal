@@ -1,17 +1,15 @@
 from django.contrib.auth.models import Group, User
 from django.contrib.auth import authenticate, login, logout
-<<<<<<< HEAD
 from django.forms.models import inlineformset_factory
 from django.forms.models import modelformset_factory
-
-# Create your views here.
-=======
->>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8
 from django.core.context_processors import csrf
 from portal.models import *
 from django.shortcuts import *
 from django import forms
 from forms import *
+from django.http import *
+
+# Create your views here.
 
 def log_out(request):
     logout(request)
@@ -187,7 +185,7 @@ def coredetails(request, id1):
             
     else:
         form = CoreUserProfile(initial={'user':user,})
-        return render_to_response('addcore.html',{'form':form,},context_instance=RequestContext(request)) 
+        return render_to_response('addcore.html',{'form':form},context_instance=RequestContext(request)) 
 
 
 
@@ -313,25 +311,30 @@ def viewevent(request,event_id):
 <<<<<<< HEAD
     return render_to_response("pref_choice.html",locals())
 
-   
-def answer(request,event_id):
-    questions=Question.objects.filter(event.id=event_id)
-    AnswerFormSet=inlineformset_factory(Question,Answer,extra=1)
-    if (request.method=='POST'):
-        answerformset=AnswerFormSet(request.POST,request.FILES,queryset=Question.objects.filter(event.id=event_id))
+"""  
+
+def answer(request,event_name):
+	"""
+	sends a questionnaire depending upon the event 
+	collects the answer after submission and saves it
+	"""
+	eventtemp=Event.objects.get(name=event_name)
+	questions1 = Question.objects.filter(event=eventtemp)
+	AnswerFormSet=inlineformset_factory(Question,Answer,extra=1)
+	if request.method=='POST':
+		answerformset=AnswerFormSet(request.POST,request.FILES,queryset=Question.objects.filter(event=eventtemp))
         if answerformset.is_valid():
-            answerformset.save()   
-	    answers=Answer.objects.filter(question=questions) 
-            return render_to_response('success.html',{'answers':answers},context_instance=RequestContext(request))
+        	answerformset.save()   
+			#return HttpResponse('success')
+		#else:
+			#return HttpResponse("failure")
 
-    else:
-	
-            answerformset=AnswerFormSet(queryset=Question.objects.filter(event.id=event_id))
-	    
-    return render_to_response('answer.html',{'answerformset':answerformset,'questions':questions},context_instance=RequestContext(request))
+	else:
+		answerformset=AnswerFormSet(queryset=Question.objects.filter(event=eventtemp))
+    	return render_to_response('answer.html',{'answerformset':answerformset,'questions':questions1},context_instance=RequestContext(request))
 
 
-    
+"""  
 =======
     return render_to_response("pref_choice.html",locals())    
 >>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8

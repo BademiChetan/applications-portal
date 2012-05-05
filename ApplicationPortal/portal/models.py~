@@ -11,12 +11,12 @@ class UserProfile(models.Model):
     """    
     user=models.ForeignKey(User)
     rollno=models.CharField(max_length=20)   
-    roomnumber=models.CharField(max_length=20)
     hostel=models.CharField(max_length=20)
     ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
-    
-    group=models.ForeignKey(Group)
+    cgpa=models.IntegerField()
+    room_number=models.IntegerField()
+    email=models.EmailField()
     
     def __unicode__(self):
         return self.user
@@ -44,10 +44,7 @@ class Question(models.Model):
     def __unicode__(self):
         return self.question
     
-<<<<<<< Updated upstream
-    def __unicode__(self):
-        return self.update_text
-        
+
 class Credentials(models.Model):
     """
     Credentials for a user 
@@ -77,12 +74,11 @@ class Choice(models.Model): #modifications required
     user=models.ForeignKey(UserProfile)
     is_accepted=models.IntegerField(default=0) #0-unevaluated,1-accepted,-1-rejected
 
-    
+<<<<<<< HEAD
+=======
     def __unicode__(self):
         return self.user
-=======
-
->>>>>>> Stashed changes
+>>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8
 
 class Answer(models.Model):
     """
@@ -94,5 +90,4 @@ class Answer(models.Model):
     
     def __unicode__(self):
         return self.answer
-    
 

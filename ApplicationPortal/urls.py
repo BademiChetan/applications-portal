@@ -1,12 +1,13 @@
 from django.conf.urls.defaults import patterns, include, url
-from portal.views import *
+#from portal.views import *
+from django.conf.urls.defaults import *
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^answer$', 'ApplicationPortal.portal.views.answer', name='answer'),
+    url(r'^answer/$', 'ApplicationPortal.portal.views.answer', name='answer'),
     #url(r'^answer$', 'ApplicationPortal.portal.views.answer', name='home'),
     url(r'^core/$', 'ApplicationPortal.portal.views.core_home', name='core'),
     url(r'^coord/$', 'ApplicationPortal.portal.views.coord_home', name='coord'),

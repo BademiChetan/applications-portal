@@ -45,24 +45,22 @@ class RegistrationForm(forms.Form):
     username=forms.CharField()
     password=forms.CharField(widget=forms.PasswordInput)
     confirm_password=forms.CharField(widget=forms.PasswordInput)
-<<<<<<< HEAD
     cgpa=forms.IntegerField()
-    room number=forms.IntergerField()
-    email=EmailField()
+    room_number=forms.IntegerField()
+    email=forms.EmailField()
 
 
 
-class AddGroup(form.ModelForm):
+class AddGroup(forms.ModelForm):
     class Meta:
         model = Group
    	widgets={'permissions':forms.MultipleChoiceField(widget=CheckboxSelectMultiple())}
-=======
     cgpa=forms.DecimalField(max_digits=4,decimal_places=2)
     room_number=forms.IntegerField()
     email=forms.EmailField()
     hostel=forms.CharField()
     phoneno=forms.IntegerField()
->>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8
+
 
 class EventForm(forms.ModelForm):
     class Meta:

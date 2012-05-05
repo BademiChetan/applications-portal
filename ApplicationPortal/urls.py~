@@ -6,7 +6,7 @@ from portal.views import *
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^answer$', 'ApplicationPortal.portal.views.answer', name='answer'),
+    url(r'^answer/$', 'ApplicationPortal.portal.views.answer', name='answer'),
     #url(r'^answer$', 'ApplicationPortal.portal.views.answer', name='home'),
     url(r'^core/$', 'ApplicationPortal.portal.views.core_home', name='core'),
     url(r'^coord/$', 'ApplicationPortal.portal.views.coord_home', name='coord'),
