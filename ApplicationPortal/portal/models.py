@@ -5,22 +5,20 @@ from django.contrib.auth.models import *
 import datetime
 # Create your models here.
 
-class UserProfile(models.Model):
-    """
-    Userprofile
-    """    
-    user=models.ForeignKey(User)
-    rollno=models.CharField(max_length=20)   
-    roomnumber=models.CharField(max_length=20)
-    hostel=models.CharField(max_length=20)
-    ph_no=models.BigIntegerField(max_length=23)    
-    is_core=models.BooleanField(default=False)
-    
-    group=models.ForeignKey(Group)
-    
+
+class Core(models.Model):
+    a_id = models.CharField(max_length=200)
+
+
+
+class Random(models.Model):
+    a_id = models.CharField(max_length=200)
+
     def __unicode__(self):
-        return self.user
-   
+        return self.a_id
+
+class RandomAgain(models.Model):
+    b_id = models.IntegerField()
 class Event(models.Model):
     """
     Creates an event for a specific Type
@@ -33,6 +31,24 @@ class Event(models.Model):
                 
     class Meta:
         ordering = ['name']
+class UserProfile(models.Model):
+    """
+    Userprofile
+    """    
+    user=models.ForeignKey(User)
+    rollno=models.CharField(max_length=20)   
+    roomnumber=models.CharField(max_length=20)
+    hostel=models.CharField(max_length=20)
+    ph_no=models.BigIntegerField(max_length=23)    
+    ph_no_again=models.BigIntegerField(max_length=23)    
+    is_core=models.BooleanField(default=False)
+    
+    group=models.ForeignKey(Group)
+    event = models.ForeignKey(Event)
+    
+    def __unicode__(self):
+        return self.user
+   
         
 class Question(models.Model):
     """
