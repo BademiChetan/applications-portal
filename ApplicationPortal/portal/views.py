@@ -186,3 +186,37 @@ def coredetails(request, id1):
     else:
         form = CoreUserProfile(initial={'user':user,})
         return render_to_response('addcore.html',{'form':form},context_instance=RequestContext(request)) 
+
+def editcore(request, id1):
+    """
+    To edit details of cores or delete cores
+    
+    """
+    user=User.objects.get(id=id1)
+    core=UserProfile.objects.get(user=user)
+    if request.method == 'POST':
+        if request.POST['Submit']=='Del':
+            user.delete()
+            core.delete()
+            return HttpResponse('Core has been deleted successfully.<a href="/">Home</a>')
+        else:
+            form1= AddCore(request.POST, initial={'name':user.first_name, 'username':user.username,'password':user.password,'confirm_password':user.password, 'email':user.email,} )
+            form = CoreUserProfile(request.POST, instance=core)
+            if form.is_valid(): 
+                #Write code to Save form1 details
+                user.first_name=request.POST['name']                
+                user.username=request.POST['username']
+                user.set_password(request.POST['password'])
+                user.email=request.POST['email']
+                user.save()
+                form.save()
+                return HttpResponseRedirect('/super_home/')
+            else:
+                return HttpResponse('Error')
+            
+    else:
+        form1=AddCore(initial={'name' : user.first_name, 'username':user.username,'password':user.password, 'confirm_password':user.password, 'email':user.email,} )
+        form = CoreUserProfile(instance=core)
+        return render_to_response('editcore.html',{'form':form,'form1':form1,},context_instance=RequestContext(request)) 
+
+    

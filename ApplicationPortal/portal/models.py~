@@ -73,12 +73,9 @@ class Choice(models.Model): #modifications required
     pref_no=models.IntegerField()
     user=models.ForeignKey(UserProfile)
     is_accepted=models.IntegerField(default=0) #0-unevaluated,1-accepted,-1-rejected
-
-<<<<<<< HEAD
-=======
+   
     def __unicode__(self):
         return self.user
->>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8
 
 class Answer(models.Model):
     """

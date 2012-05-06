@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^delgroup/(?P<temp>.+)/$', 'ApplicationPortal.portal.views.delgroup', name='delgroup'),
     url(r'^editgroup/(?P<temp>.+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
     url(r'^addcore/(?P<temp>.+)/$', 'ApplicationPortal.portal.views.addcore', name='addcore'),
+    url(r'^editcore/(?P<id1>\d+)/$', 'ApplicationPortal.portal.views.editcore', name='editcore'),
     url(r'^coredetails/(?P<id1>\d+)/$', 'ApplicationPortal.portal.views.coredetails', name='coredetails'),
 
     # url(r'^ApplicationPortal/', include('ApplicationPortal.foo.urls')),
