@@ -311,13 +311,13 @@ def viewevent(request,event_id):
 <<<<<<< HEAD
     return render_to_response("pref_choice.html",locals())
 
-"""  
+  
 
 def answer(request,event_name):
-	"""
+	
 	sends a questionnaire depending upon the event 
 	collects the answer after submission and saves it
-	"""
+
 	eventtemp=Event.objects.get(name=event_name)
 	questions1 = Question.objects.filter(event=eventtemp)
 	AnswerFormSet=inlineformset_factory(Question,Answer,extra=1)
@@ -334,7 +334,7 @@ def answer(request,event_name):
     	return render_to_response('answer.html',{'answerformset':answerformset,'questions':questions1},context_instance=RequestContext(request))
 
 
-"""  
+
 =======
     return render_to_response("pref_choice.html",locals())    
 >>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8
