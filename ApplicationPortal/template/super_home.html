@@ -7,14 +7,17 @@
     <thead>
     <tr>
         <th>Group Name</th>
+        <th>Cores</th>
     </tr>
     </thead>
 
-    {% for g in grp %}
+    {% for d in data %}
         <tr>
-            <td>{{g}}</td>
-            <td><button type="submit" name="Edit" value="{{g}}" >Edit</button></td>
-	        <td><button type="submit" name="Del" value="{{g}}" >Delete</button></td>
+            <td>{{d.0}}</td>
+            <td>{% for c in d.1 %}{{c}}<br/>{% endfor %}</td>
+            <td><button type="submit" name="Edit" value="{{d.0}}" >Edit</button></td>
+	        <td><button type="submit" name="Del" value="{{d.0}}" >Delete</button></td>
+	        <td><button type="submit" name="Add" value="{{d.0}}" >Add Core</button></td>
             
     {% endfor %}
 </table><br/>
