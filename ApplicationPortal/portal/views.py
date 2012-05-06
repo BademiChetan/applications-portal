@@ -80,6 +80,8 @@ def super_home(request):
     The super user can add/edit a group and its permissions
  
     """
+    if request.user.is_authenticated() is not True or request.user.is_superuser is not True:
+        return HttpResponseRedirect('/')
     if(request.method=='POST'):
         try:
             request.POST['Add']
@@ -100,11 +102,14 @@ def super_home(request):
         grp.append(g.name)
         members=User.objects.filter(groups=g)
         core=[]
+        links=[]
         for m in members:
             u=UserProfile.objects.get(user=m)
             if(u.is_core==True):
                 core.append(m)
-        cores.append(core)
+                link="/editcore/"+str(m.id)
+                links.append(link)
+        cores.append(zip(core,links))
     data=zip(grp,cores)
     return render_to_response('super_home.html',locals(),context_instance= RequestContext(request))
 
@@ -120,7 +125,7 @@ def addgroup(request):
             new_group = form.save()
             return HttpResponseRedirect('/super_home/')
         else:
-            return HttpResponse('Group already exists! <a href="/">Home</a>')
+            return HttpResponse('Group name unavailable! <a href="/addgroup">Back</a>')
             
     else:
         form = AddGroup()
@@ -173,7 +178,10 @@ def addcore(request,temp):
             inputs = form.cleaned_data
             new_user = User(first_name=inputs['name'],username=inputs['username'],email=inputs['email'])
             new_user.set_password(inputs['password'])
-            new_user.save()
+            try:
+                new_user.save()
+            except:
+                return HttpResponse('Username is not available.<a href='+"/addcore/"+str(temp)+'>Back</a>')
             new_user.groups.add(grp)
             new_user.save()
             new_user = authenticate(username=inputs['username'],password=inputs['password'])
@@ -200,3 +208,6 @@ def coredetails(request, id1):
     else:
         form = CoreUserProfile(initial={'user':user, 'is_core':True})
         return render_to_response('addcore.html',{'form':form},context_instance=RequestContext(request)) 
+
+def editcore(request,id1):
+    return HttpResponse('Edit Core Page')
