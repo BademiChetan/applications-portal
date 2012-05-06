@@ -14,9 +14,8 @@ class UserProfile(models.Model):
     hostel=models.CharField(max_length=20)
     ph_no=models.BigIntegerField(max_length=23)    
     is_core=models.BooleanField(default=False)
-    cgpa=models.IntegerField()
+    cgpa=models.FloatField()
     room_number=models.IntegerField()
-    email=models.EmailField()
     
     def __unicode__(self):
         return self.user
@@ -70,15 +69,12 @@ class Choice(models.Model): #modifications required
     Each user has three choices.
     """
     event=models.ForeignKey(Event)
-    pref_no=models.IntegerField()
+    pref_no=models.IntegerField() #1,2 or 3
     user=models.ForeignKey(UserProfile)
     is_accepted=models.IntegerField(default=0) #0-unevaluated,1-accepted,-1-rejected
-
-<<<<<<< HEAD
-=======
+   
     def __unicode__(self):
         return self.user
->>>>>>> f7b78146c03ce585222c610db06513189dfd2dd8
 
 class Answer(models.Model):
     """

@@ -1,15 +1,79 @@
 <html>
-<body>
-Welcome {{user}}!
-</br>
-<table>
-<tr>
-{% for e in event %}
-<td>
-<a href="/{{ e.name }}/">{{ e.name }}</a>
-</td>
-{% endfor %}
-</tr>
-</table>
-</body>
-</html>
+{% if added %}
+<font color="red">Question Added!</font><br/>
+{% endif %}
+
+{% if edited %}
+<font color="red">Question Edited!</font><br/>
+{% endif %}
+
+{% if deleted %}
+<font color="red">Question Deleted!</font><br/>
+{% endif %}
+
+{% if event_edited %}
+<font color="red">Event Edited!</font><br/>
+{% endif %}
+
+<form action="" method="post">
+{% csrf_token %}
+{% if not edit %}
+    <a href="/core_home/">Back</a><br/>
+    <a href="?edit_name=1">Edit Event Name</a><br/>
+    <a href="?add=1">Create new question</a><br/>
+    <a href="?exist=1">Use an existing question</a><br/>
+    <a href="viewapplicants/">View Applicants</a><br/>
+    <a href="final_list/">View Finalised List of Applicants</a><br/>
+    
+    {% if edit_name %}
+    <input type="text" name="event_name" value="{{ event.name }}">
+    <input type="submit" value="Change" name="event_edit">
+    {% endif %}
+    
+    {% if add %}
+
+    <input type="text" name="question_new">
+    <input type="submit" value="ADD" name="add">
+    
+    {% endif %}
+    {% if exist %}
+    <table>
+    {% if all_questions %}
+    {% for q in all_questions %}
+    <tr>
+    <td><input type="checkbox" name="qn_existing" value="{{ q.id }}"/></td>
+    <td>{{ q }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    <input type="submit" value="Select" name="select">
+    {% else %}
+    No questions.
+    {% endif %}
+    {% endif %}
+    
+    <hr/>
+    <h3>Questions added for {{ event.name }}:</h3>
+    {% if not question_list %}
+    No questions added to this event yet.
+    {% else %}
+    To edit a question, click on it.
+    <table>
+    {% for q in question_list %}
+    <tr>
+    <td><input type="checkbox" name="qn_delete" value="{{ q.id }}"/></td>
+    <td><a href="{{ q.id }}/">{{ q }}</a></td>
+    </tr>
+    {% endfor %}
+    </table>
+    <input type="submit" value="Delete" name="delete">
+    {% endif %}
+
+{% else %}
+    <a href="../">Back</a><br/>
+    <input type="text" value="{{ question }}" name="question_edit"><br/>
+    <input type="submit" value="CHANGE" name="edit">
+{% endif %}
+</form>
+      
+</html> 

@@ -1,23 +1,46 @@
 <html>
-
-
 <body>
-Welcome {{user}}!
+{% if added %}
+<font color="red">Event Added!</font><br/>
+{% endif %}
+{% if deleted %}
+<font color="red">Event Deleted!</font><br/>
+{% endif %}
+Welcome {{request.user}}!
 <br/>
-<table>
-<tr>
-{% for e in event %}
-<td>
-<a href="/{{ e.id }}/">{{ e.name }}</a>
-</td>
-<td>
-<a href="/editeventname/{{e.id}}/">Edit Event</a>
-</td>
-
-{% endfor %}
-</tr>
-</table>
-<a href="/addevent">Add Event</a>
+<a href="/logout/">Logout</a>
+<br/>
+<hr/>
+To add an event to a group, click on the group name. Click on an event to view/add/edit/delete questions
+or to edit the Event name.<br/>
+<form action="" method="post">
+    {% csrf_token %}
+    <table border=1>
+    <th>Group</th><th>Event</th>
+    {% for g, event in group %}
+    <tr>
+        <td>
+        <h3><a href="/core_home/addevent/{{ g.id }}/">{{ g }}</a></h3>
+        </td>
+        <td>
+        {% if not event %}
+            You have not added any events for this group yet.
+        {% else %}
+        <table>
+        {% for e in event %}
+                <tr>
+                <td><input type="checkbox" name="event_delete" value="{{ e.id }}"/></td>
+                <td><a href="/core_home/events/{{ e.id }}/">{{ e.name }}</a></td>
+                </tr>
+        {% endfor %}
+        </table>
+        {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+<input type="submit" value="Delete" name="delete">
+</form>
 </body>
 
 </html>

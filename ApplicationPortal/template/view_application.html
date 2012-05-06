@@ -1,14 +1,34 @@
 <html>
 <body>
-Welcome,
-
-the application of {{temp.username}} is as follows:
-
-{% for i in questions %}
-    {% for j in answers %}
-	{{questions.question}}<br/>
-	{{answers.answer}}<br/>
-    {% endfor %}
+Welcome {{ request.user }}!
+<br/>
+<table width=100%>
+<tr>
+<td>
+<a href="/core_home/viewapplication/{{ u.id }}/{{ choice1.event.id }}/">{{ choice1.event }}</a>
+</td>
+<td>
+<a href="/core_home/viewapplication/{{ u.id }}/{{ choice2.event.id }}/">{{ choice2.event }}</a>
+</td>
+<td>
+<a href="/core_home/viewapplication/{{ u.id }}/{{ choice3.event.id }}/">{{ choice3.event }}</a>
+</td>
+</tr>
+</table>
+<hr/>
+{% if event_id %}
+The application of {{u.first_name}} {{u.last_name}} for {{ event }} is as follows:<br/>
+{% if answers %}
+<ol>
+{% for a in answers %}
+<li>{{ a }}</li>
 {% endfor %}
+</ol>
+{% else %}
+The applicant has not filled up the application for this event.
+{% endif %}
+{% else %}
+Please choose an event.
+{% endif %}
 </body>
 </html>

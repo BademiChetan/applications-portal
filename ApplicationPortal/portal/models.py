@@ -5,20 +5,21 @@ from django.contrib.auth.models import *
 import datetime
 # Create your models here.
 
-
-class Core(models.Model):
-    a_id = models.CharField(max_length=200)
-
-
-
-class Random(models.Model):
-    a_id = models.CharField(max_length=200)
-
+class UserProfile(models.Model):
+    """
+    Userprofile
+    """    
+    user=models.ForeignKey(User)
+    rollno=models.CharField(max_length=20)   
+    hostel=models.CharField(max_length=20)
+    ph_no=models.BigIntegerField(max_length=23)    
+    is_core=models.BooleanField(default=False)
+    cgpa=models.FloatField()
+    room_number=models.IntegerField()
+    
     def __unicode__(self):
-        return self.a_id
-
-class RandomAgain(models.Model):
-    b_id = models.IntegerField()
+        return self.user
+   
 class Event(models.Model):
     """
     Creates an event for a specific Type
@@ -31,26 +32,6 @@ class Event(models.Model):
                 
     class Meta:
         ordering = ['name']
-class UserProfile(models.Model):
-    """
-    Userprofile
-    """    
-    user=models.ForeignKey(User)
-    rollno=models.CharField(max_length=20)   
-    hostel=models.CharField(max_length=20)
-    ph_no=models.BigIntegerField(max_length=23)    
-    ph_no_again=models.BigIntegerField(max_length=23)    
-    is_core=models.BooleanField(default=False)
-    cgpa=models.IntegerField()
-    room_number=models.IntegerField()
-    email=models.EmailField()
-    
-    group=models.ForeignKey(Group)
-    event = models.ForeignKey(Event)
-    
-    def __unicode__(self):
-        return self.user
-   
         
 class Question(models.Model):
     """
@@ -88,7 +69,7 @@ class Choice(models.Model): #modifications required
     Each user has three choices.
     """
     event=models.ForeignKey(Event)
-    pref_no=models.IntegerField()
+    pref_no=models.IntegerField() #1, 2 or 3
     user=models.ForeignKey(UserProfile)
     is_accepted=models.IntegerField(default=0) #0-unevaluated,1-accepted,-1-rejected
    

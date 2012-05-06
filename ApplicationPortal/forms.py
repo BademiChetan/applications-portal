@@ -33,12 +33,12 @@ class SubmitButtonField(forms.Field):
 class Loginform(forms.Form):
     username=forms.CharField()
     password=forms.CharField(widget=forms.PasswordInput)
-
+"""
 class Preferenceform(forms.Form):
     preference1=forms.ModelChoiceField(queryset=Event.objects.all()) #from models they shd send the name of the event alone
     preference2=forms.ModelChoiceField(queryset=Event.objects.all()) 
     preference3=forms.ModelChoiceField(queryset=Event.objects.all()) 
-
+"""
 class RegistrationForm(forms.Form):
     name=forms.CharField()
     rollnumber=forms.CharField()
@@ -48,13 +48,14 @@ class RegistrationForm(forms.Form):
     cgpa=forms.IntegerField()
     room_number=forms.IntegerField()
     email=forms.EmailField()
+    hostel=forms.CharField()
+    phoneno=forms.IntegerField()
 
-
-
+"""
 class AddGroup(forms.ModelForm):
     class Meta:
         model = Group
-   	widgets={'permissions':forms.MultipleChoiceField(widget=CheckboxSelectMultiple())}
+    widgets={'permissions':forms.MultipleChoiceField(widget=CheckboxSelectMultiple())}
     cgpa=forms.DecimalField(max_digits=4,decimal_places=2)
     room_number=forms.IntegerField()
     email=forms.EmailField()
@@ -98,7 +99,7 @@ class AnswerForm(forms.ModelForm):
         model = Answer
         fields = {'answer'}
         widgets = {'answer': forms.Textarea(attrs={'cols': 80, 'rows': 20}),}
-
+"""
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -107,7 +108,7 @@ class UserProfileForm(forms.ModelForm):
 class AddGroup(forms.ModelForm):
     class Meta:
         model = Group
-	   
+ 
 class AddCore(forms.Form):
     name=forms.CharField()
     username=forms.CharField()

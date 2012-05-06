@@ -1,8 +1,20 @@
 <html>
+
+{% if accept %}
+<font color="red">Candidates Accepted!</font>
+{% endif %}
+
+{% if reject %}
+<font color="red">Candidates Rejected!</font>
+{% endif %}
+
+<a href="../">Back</a><br/>
+View by:<br/>
 <form action="" method="post">
-<input type="radio" name="preference" value="preference1" />Preference 1<br/>
-<input type="radio" name="preference" value="preference2" />Preference 2<br/>
-<input type="radio" name="preference" value="preference3" />Preference 3<br/>
+{% csrf_token %}
+<input type="radio" name="preference" value="1" />First Preference<br/>
+<input type="radio" name="preference" value="2" />Second Preference<br/>
+<input type="radio" name="preference" value="3" />Third Preference<br/>
 <input type="submit" value="Select" name="prefchoice"/>
 
 <br/>
@@ -14,15 +26,15 @@
 <input type="checkbox" name="acc_rej" value="{{ c.user.id }}"/>
 </td>
 <td>
+<a href="/core_home/viewapplication/{{ c.user.id }}/{{ event.id }}/">
 {{ c.user.user.first_name }} {{ c.user.user.last_name }}
+</a>
 </td>
 </tr>
 {% endfor %}
-<tr>
-<td><input type="submit" value="Accept" name="accept"/></td>
-<td><input type="submit" value="Reject" name="reject"/></td>
-</tr>
 </table>
+<input type="submit" value="Accept" name="accept"/>
+<input type="submit" value="Reject" name="reject"/>
 {% endif %}
 </form>
 </html>

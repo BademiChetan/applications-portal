@@ -1,9 +1,8 @@
 <html>
-    	 <br/>
+<h1>{{ group }}</h1>
+<br/>
 {% if error %}
-	<strong>
-		You left the event name blank
-	</strong>
+		<font color="red">You left the event name blank!</font>
 {% endif %}  
         <form action="" method="POST">    
 		{% csrf_token %}
@@ -11,9 +10,10 @@
                 
    		<input type="submit" value="Add Event"/>
     	</form>
+    	<a href="/core_home/">Back</a>
 {% for i in p %}
         <tr><td>{{i.name}}</td><td><a href="editevent/{{i.id}}/">Edit</td></tr>
-        
+ {% endfor %}       
 
 
 </html>
