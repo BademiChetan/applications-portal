@@ -39,6 +39,6 @@ class AddCore(forms.Form):
 class CoreUserProfile(forms.ModelForm):
     class Meta:
         model=UserProfile 
-        fields={'user', 'rollno', 'room_number', 'hostel', 'ph_no', 'is_core','cgpa',}     
-        widgets={'user':forms.HiddenInput(),}  
+        fields={'user', 'rollno', 'room_number', 'hostel', 'ph_no', 'is_core', 'cgpa',}     
+        widgets={'user':forms.HiddenInput(), 'is_core':forms.HiddenInput(),}  
 
