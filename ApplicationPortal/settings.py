@@ -1,2 +1,3 @@
 import local_settings
-from loca_settings import *
+from local_settings import *
+

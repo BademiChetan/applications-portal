@@ -1,0 +1,35 @@
+<html>
+<a href="../">Back</a><br/>
+{% if candidate %}
+Selected Candidates for {{event}} are: <br/>
+<table>
+<th>
+<td>Name</td>
+<td>Roll No.</td>
+<td>Hostel</td>
+<td>Room Number</td>
+<td>Phone Number</td>
+<td>Email</td>
+<td>CGPA</td>
+</th>
+{% for candidate in accepted %}
+<tr>
+<td>
+<a href="/core_home/viewapplication/{{ candidate.user.id }}/{{ event.id }}/">
+{{ candidate.user.user.first_name }} {{ candidate.user.user.last_name }}
+</a>
+</td>
+<td>{{candidate.user.rollno}}</td>
+<td>{{candidate.user.hostel}}</td>
+<td>{{candidate.user.room_number}}</td>
+<td>{{candidate.user.ph_no}}</td>
+<td>{{candidate.user.user.email}}</td>
+<td>{{candidate.user.cgpa}}</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+No Finalised candidates yet.
+{% endif %}
+</html>
+
