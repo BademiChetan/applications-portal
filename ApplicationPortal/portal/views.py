@@ -13,21 +13,25 @@ def log_out(request):
     
             
 def register(request):
+    regs=User.objects.all()
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            inputs = form.cleaned_data
-            new_user = User(first_name=inputs['name'],username=inputs['username'],email=inputs['email'])
-            new_user.set_password(inputs['password'])
-            new_user.save()
-            new_user = authenticate(username=inputs['username'],password=inputs['password'])
-            login(request, new_user)
-            new_profile=UserProfile(user=User.objects.get(username=request.POST['username']),rollno=request.POST['rollnumber'],hostel=request.POST['hostel'],ph_no=request.POST['phoneno'],room_number=request.POST['room_number'],cgpa=request.POST['cgpa'])
-            new_profile.save()
-            return HttpResponseRedirect('/')
+		form = RegistrationForm(request.POST)
+
+		if form.is_valid():
+			print(form.is_valid)
+			inputs = form.cleaned_data
+			new_user = User(first_name=inputs['name'],username=inputs['username'],email=inputs['email'])
+			new_user.set_password(inputs['password'])
+			new_user.save()
+			new_user = authenticate(username=inputs['username'],password=inputs['password'])
+			login(request, new_user)
+			new_profile=UserProfile(user=User.objects.get(username=request.POST['username']),rollno=request.POST['rollnumber'],hostel=request.POST['hostel'],ph_no=request.POST['phoneno'],room_number=request.POST['room_number'],cgpa=request.POST['cgpa'])
+			return HttpResponseRedirect('/home/')
+		form = RegistrationForm(request.POST)
+		return render_to_response('Register.html',locals(),context_instance=RequestContext(request))
     else:
         form = RegistrationForm()
-    return render_to_response('Register.html',locals(),context_instance=RequestContext(request))
+	return render_to_response('Register.html',locals(),context_instance=RequestContext(request))
 
 
 def home(request):
