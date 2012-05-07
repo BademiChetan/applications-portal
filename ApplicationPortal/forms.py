@@ -16,16 +16,35 @@ class Preferenceform(forms.Form):
 """
 
 class RegistrationForm(forms.Form):
-    name=forms.CharField()
-    rollnumber=forms.CharField()
-    username=forms.CharField()
-    password=forms.CharField(widget=forms.PasswordInput)
-    confirm_password=forms.CharField(widget=forms.PasswordInput)
-    cgpa=forms.IntegerField()
-    room_number=forms.IntegerField()
-    email=forms.EmailField()
-    hostel=forms.CharField()
-    phoneno=forms.IntegerField()
+    name=forms.CharField(help_text='Enter your first name eg. Chetan')
+    rollnumber=forms.CharField(max_length = 8, help_text='Enter your Roll no eg. MM11B001')
+    username=forms.RegexField(regex=r'^\w+$',max_length = 30, help_text='Your username must contain only alphabets / integers')
+    password=forms.CharField(widget=forms.PasswordInput, help_text='Your password must contain at least 6 characters',min_length=6)
+    confirm_password=forms.CharField(widget=forms.PasswordInput, help_text='Enter the same password')
+    cgpa=forms.DecimalField(max_digits=4,decimal_places=2, help_text='eg. 8.56, 9.00, but not 7.333')
+    room_number=forms.IntegerField(help_text='Room number eg. 123')
+    email=forms.EmailField(help_text='email id')
+    hostel=forms.CharField(help_text='hostel eg. Jamuna',max_length=20)
+    phoneno=forms.IntegerField(help_text='your contact no')
+    
+    def clean_username(self):
+    	
+    	try:
+    		user = User.objects.get(username = self.cleaned_data['username'])
+    	except User.DoesNotExist:
+    		return self.cleaned_data['username']
+    	raise forms.ValidationError(u'Username already exists')
+    	
+    	
+    	
+    def clean_confirm_password(self):
+    	data = self.cleaned_data
+    	pass1 = data['password']
+    	pass2 = data['confirm_password']
+    	if pass1 and pass2:
+    		if pass1 != pass2:
+    			raise forms.ValidationError(u'Passwords must match')
+    	return self.cleanned_data['confirm_password']
 
 """
 class EventForm(forms.ModelForm):
