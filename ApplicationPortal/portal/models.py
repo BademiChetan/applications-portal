@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     is_core=models.BooleanField(default=False)
     cgpa=models.FloatField()
     room_number=models.IntegerField()
-    
+
     def __unicode__(self):
         return self.user
    

@@ -6,9 +6,9 @@ from django.conf.urls.defaults import *
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-
+    # Examples:
+    url(r'^answer/$', 'ApplicationPortal.portal.views.answer', name='answer'),
     url(r'^register/$', 'ApplicationPortal.portal.views.register', name='register'),
-    
     url(r'^$', 'ApplicationPortal.portal.views.home', name='home'),
     url(r'^logout/$', 'ApplicationPortal.portal.views.log_out', name='logout'),
     url(r'^super_home/$', 'ApplicationPortal.portal.views.super_home', name='super_home'),
@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^editgroup/(?P<temp>.+)/$', 'ApplicationPortal.portal.views.editgroup', name='editgroup'),
     url(r'^addcore/(?P<temp>.+)/$', 'ApplicationPortal.portal.views.addcore', name='addcore'),
     url(r'^coredetails/(?P<id1>\d+)/$', 'ApplicationPortal.portal.views.coredetails', name='coredetails'),
-    
+    url(r'^editcore/(?P<id1>\d+)/$', 'ApplicationPortal.portal.views.editcore', name='editcore'),
     url(r'^core_home/$', 'ApplicationPortal.portal.views.core_home', name='core'),
     url(r'^core_home/addevent/(\d+)/$','ApplicationPortal.portal.views.addevent',name='addevent'),    
     url(r'^core_home/events/(\d+)/$', 'ApplicationPortal.portal.views.core_events', name='events'),
