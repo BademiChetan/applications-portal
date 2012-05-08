@@ -10,9 +10,9 @@ class Loginform(forms.Form):
 
 
 class Preferenceform(forms.Form):
-    preference1=forms.ModelChoiceField(queryset=Event.objects.all(),empty_label="None") #from models they shd send the name of the event alone
-    preference2=forms.ModelChoiceField(queryset=Event.objects.all(),empty_label="None") 
-    preference3=forms.ModelChoiceField(queryset=Event.objects.all(),empty_label="None") 
+    preference1=forms.ModelChoiceField(queryset=Event.objects.all(),empty_label="Select") #from models they shd send the name of the event alone
+    preference2=forms.ModelChoiceField(queryset=Event.objects.all(),empty_label="Select") 
+    preference3=forms.ModelChoiceField(queryset=Event.objects.all(),empty_label="Select") 
 
 
 class RegistrationForm(forms.Form):
