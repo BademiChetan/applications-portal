@@ -416,23 +416,41 @@ def final_list(request,event_id=None):
     return render_to_response("final.html",locals()) 
 
     
-"""
+
 #@Coords_Only    
 def coord_home(request):
-    current="blah"
+    user=request.user
+    choiceset=Choice.objects.filter(user=request.user)
     if(request.method=='POST'):
-            try:
-                request.POST['save']
-            except:
-                choice=request.POST['choice']
-                return render_to_response("answers.html",{'choice':choice})    
-            return render_to_response("coord_home.html",{'user':current})    
-    try:
-        choiceset=Choice.objects.filter(user=request.user)
-    except Exception:
+        try:
+            request.POST['save']
+        except:
+            choice=request.POST['choice']            
+            return HttpResponseRedirect('/answers/'+str(choiceset.get(pref_no=choice).event))
+        form=Preferenceform(request.POST)
+        if choiceset.count() ==0:
+            choice=Choice(user=request.user,pref_no=1,event=Event.objects.get(id=form['preference1'].value))
+            choice.save()
+            choice=Choice(user=request.user,pref_no=2,event=Event.objects.get(id=form['preference2'].value))
+            choice.save()
+            choice=Choice(user=request.user,pref_no=3,event=Event.objects.get(id=form['preference3'].value))
+            choice.save()
+        else:        
+            choice=choiceset.get(pref_no=1)
+            choice.event=Event.objects.get(id=form['preference1'].value)
+            choice.save()
+            choice=choiceset.get(pref_no=2)
+            choice.event=Event.objects.get(id=form['preference2'].value)
+            choice.save()
+            choice=choiceset.get(pref_no=3)
+            choice.event=Event.objects.get(id=form['preference3'].value)
+            choice.save()        
+        return render_to_response("coord_home.html",{'user':user,'saved':True,'PreferenceForm':form,'selected':True},context_instance= RequestContext(request))    
+    if choiceset.count() == 0:
         form=Preferenceform()
-        return render_to_response("coord_home.html",{'user':current,'PreferenceForm':form,'choiceset':False})
-    form.Preferenceform(initial = {'preference1':choiceset.objects.get(pref_no=1).event,'preference1':choiceset.objects.get(pref_no=2).event,'preference1':choiceset.objects.get(pref_no=3).event})
-    return render_to_response("coord.html",{'user':current,'PreferenceForm':form,'choiceset':True})
-"""
+        return render_to_response("coord_home.html",{'user':user,'PreferenceForm':form,'selected':False,})
+    form = Preferenceform(initial={'preference1':choiceset.get(pref_no=1).event,'preference2':choiceset.get(pref_no=2).event,'preference3':choiceset.get(pref_no=3).event,})
+    return render_to_response("coord_home.html",{'user':user,'PreferenceForm':form,'selected':True},context_instance= RequestContext(request)) 
 
+def answers(request,name):
+    return HttpResponse(name)

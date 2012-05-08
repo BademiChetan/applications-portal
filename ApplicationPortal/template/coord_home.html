@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<TITLE>Application Portal</TITLE>
+</HEAD>
+<BODY>
+<H1> Coordinator's Application Portal </H1>
+Hello {{user.username}},<br/>
+{% if saved %}
+    SAVED
+{% endif %}
+<a href="/logout" >Logout</a><br/>
+Enter your Preferences Below:<br>
+    <form action="" method="post">
+    {% csrf_token %}
+<br>
+<table>
+{{PreferenceForm.as_table}}
+</table>
+{% if selected %}
+
+<button type="submit" name="choice" value="1" >Fill answers for Preference 1</button>
+<button type="submit" name="choice" value="2" >Fill answers for Preference 2</button>
+<button type="submit" name="choice" value="3" >Fill answers for Preference 3</button>
+{% endif %}
+<button type="submit" name="save" value='save'>Save</button><br/>
+
+</form>
+</BODY>
+</HTML>

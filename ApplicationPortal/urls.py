@@ -26,7 +26,8 @@ urlpatterns = patterns('',
     url(r'^core_home/events/(\d+)/final_list/$', 'ApplicationPortal.portal.views.final_list', name='final_list'),
     url(r'^core_home/viewapplication/(\d+)/(\d+)/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
     url(r'^core_home/viewapplication/(\d+)/$', 'ApplicationPortal.portal.views.viewapplication', name='viewapplication'),
-    
+    url(r'^coord_home/$', 'ApplicationPortal.portal.views.coord_home', name='coord'),
+    url(r'^answers/(?P<name>.+)/$', 'ApplicationPortal.portal.views.answers', name='answers'),
     #url(r'^coord_home/$', 'ApplicationPortal.portal.views.coord_home', name='coord'),
 
     # Examples:
