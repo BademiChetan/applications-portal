@@ -1,11 +1,11 @@
 from django.contrib.auth.models import Group, User
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
-from portal.models import *
 from django.shortcuts import *
 from django import forms
-from forms import *
 from django.db.models import Q
+from forms import *
+from models import *
 
 def log_out(request):
     logout(request)

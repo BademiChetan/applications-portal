@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.models import Group
 from django.forms.widgets import CheckboxSelectMultiple
-from portal.models import *
 from django.utils import html
+from portal.models import *
 
 class Loginform(forms.Form):
     username=forms.CharField()

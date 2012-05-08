@@ -1,11 +1,11 @@
 from django.contrib.auth.models import Group, User
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
-from portal.models import *
 from django.shortcuts import *
 from django import forms
-from forms import *
 from django.db.models import Q
+from forms import *
+from models import *
 
 def log_out(request):
     logout(request)
@@ -207,8 +207,6 @@ def coredetails(request, id1):
         form = CoreUserProfile(initial={'user':user, 'is_core':True})
         return render_to_response('addcore.html',{'form':form},context_instance=RequestContext(request)) 
 
-<<<<<<< HEAD
-
 def editcore(request, id1):
     """
     To edit details of cores or delete cores
@@ -241,9 +239,6 @@ def editcore(request, id1):
         form = CoreUserProfile(instance=core)
         return render_to_response('editcore.html',{'form':form,'form1':form1,},context_instance=RequestContext(request)) 
 
-    
-
-=======
 #@Cores_Only
 def core_home(request):
     group=[]
@@ -440,4 +435,4 @@ def coord_home(request):
     form.Preferenceform(initial = {'preference1':choiceset.objects.get(pref_no=1).event,'preference1':choiceset.objects.get(pref_no=2).event,'preference1':choiceset.objects.get(pref_no=3).event})
     return render_to_response("coord.html",{'user':current,'PreferenceForm':form,'choiceset':True})
 """
->>>>>>> master
+
